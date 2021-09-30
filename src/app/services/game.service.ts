@@ -14,7 +14,6 @@ export class GameService {
   constructor(private httpClient: HttpClient) { }
 
   getGameList(): Observable<Game[]> {
-    console.log("Jestem pierogiem");
     return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
       map(response => response._embedded.games)
     );
