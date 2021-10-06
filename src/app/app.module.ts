@@ -6,18 +6,22 @@ import { AppComponent } from './app.component';
 import { GameListComponent } from './components/game-list/game-list.component';
 import { GameService } from './services/game.service';
 import { HeaderComponent } from './components/header/header.component';
+import { MatchSectionComponent } from './components/match-section/match-section.component';
+import { GameCategoryListService } from './services/game-category-list.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameListComponent,
-    HeaderComponent
+    HeaderComponent,
+    MatchSectionComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule
   ],
-  providers: [GameService],
+  providers: [GameService, 
+    GameCategoryListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

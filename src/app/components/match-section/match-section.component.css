@@ -1,0 +1,8 @@
+.btn-group {
+    white-space: nowrap;
+  }
+  
+  .btn.btn-primary,
+  .btn.btn-success {
+    float: none;
+  }
