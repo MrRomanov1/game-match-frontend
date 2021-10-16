@@ -18,6 +18,11 @@ export class GameService {
       map(response => response._embedded.games)
     );
   }
+
+  getSingleGame(recordId: any) {
+    this.baseUrl = this.baseUrl + "/" + recordId;
+    return this.httpClient.get(this.baseUrl);
+  }
 }
 
 interface GetResponse {
