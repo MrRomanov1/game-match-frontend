@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row">        
+        <div class="col-12">
+            <ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus"
+                (slide)="onSlide($event)">
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                        <img src="../assets/slajd2test.jpg" alt="">
+                    </div>
+                    <div class="carousel-caption">
+                        <h3 style="color: rgba(255, 255, 255, 1)">test 1</h3>
+                    </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                        <img src="../assets/slajd2test.jpg" alt="">
+                    </div>
+                    <div class="carousel-caption">
+                        <h3 style="color: rgba(255, 255, 255, 1)">test 2</h3>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>        
+    </div>
+</div>

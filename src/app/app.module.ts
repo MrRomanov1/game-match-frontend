@@ -10,6 +10,8 @@ import { MatchSectionComponent } from './components/match-section/match-section.
 import { GameCategoryListService } from './services/game-category-list.service';
 import { GameRecordPageComponent } from './components/game-record-page/game-record-page.component';
 import { RoutingModule } from './routing.module';
+import { HeaderAdBannerComponent } from './components/header-ad-banner/header-ad-banner.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { RoutingModule } from './routing.module';
     GameListComponent,
     HeaderComponent,
     MatchSectionComponent,
-    GameRecordPageComponent
+    GameRecordPageComponent,
+    HeaderAdBannerComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RoutingModule
+    RoutingModule,
+    NgbModule
   ],
   providers: [GameService, 
     GameCategoryListService],
