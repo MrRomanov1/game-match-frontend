@@ -4,7 +4,7 @@ import { GameRecordPageComponent } from './components/game-record-page/game-reco
 
 const routes: Routes = [
     {path: '', component: AppComponent},
-    {path: 'game/:recordId', component: GameRecordPageComponent}
+    {path: 'games/:recordId', component: GameRecordPageComponent}
   ]
 
 export const RoutingModule = RouterModule.forRoot(routes);

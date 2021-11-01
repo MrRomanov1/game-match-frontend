@@ -19,7 +19,7 @@
                         <h3 class="mb-4">Trailer</h3>
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item col-lg-12 col-md-12 col-sm-12"
-                                src="https://www.youtube-nocookie.com/embed/JSRtYpNRoN0" title="{{game.title}} trailer"
+                                [src]="game.trailerUrl | safe" title="{{game.title}} trailer"
                                 frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen></iframe>
@@ -32,17 +32,26 @@
                         <p class="text-justify lead">{{game.descriptionFirst}}</p>
                     </div>
                 </div>
+                <div class="row mt-5" *ngIf="game.systemMinimumRequirements || game.systemRecommendedRequirements">
+                    <div class="col-12 col-md-11">
+                        <h4 class="mb-4">Wymagania sprzętowe</h4>
+                        <p class="text-justify" *ngIf="game.systemMinimumRequirements"><strong>MINIMALNE:</strong> {{game.systemMinimumRequirements}}</p>
+                        <p class="text-justify" *ngIf="game.systemRecommendedRequirements"><strong>ZALECANE:</strong> {{game.systemRecommendedRequirements}}</p>
+                    </div>
+                </div>
             </div>
             <div class="col-2">
                 <h5 class="mb-4">INFORMACJE</h5>
                 <!-- TODO ratingi z kolorkami/ikonkami -->
                 <p class="mt-2 mb-0">Data wydania:</p>
                 <p>{{game.releaseDate | date: 'dd LLLL YYYY'}}</p>
-                <p class="mt-2 mb-0">Gatunek:</p>
-                <a href="#">RPG</a> <!-- lista gatunków -->
+                <p class="mt-2 mb-0">Gatunek:</p>                
+                <a href={{getGameCategoryUrl(mainGameCategory.id)}}>{{mainGameCategory.name}}</a> <!-- lista gatunków -->
                 <!-- TODO -->
-                <p class="mt-2 mb-0">Kategorie:</p>
-                <a href="#">RPG</a> <!-- lista kategorii -->
+                <p class="mt-2 mb-0">Kategorie:</p>    
+                <div class="d-inline" *ngFor="let tempGameCat of alternateGameCategories">          
+                    <a  href="{{getGameCategoryUrl(tempGameCat.id)}}">{{tempGameCat.name}}</a><span>&#160;&#160;</span><!-- lista kategorii -->       
+                </div>           
                 <!-- TODO -->
                 <p class="mt-2 mb-0">Tryby gry:</p>
                 <a href="#">single player</a> <!-- lista trybów -->

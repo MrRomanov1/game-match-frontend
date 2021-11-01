@@ -12,6 +12,7 @@ import { GameRecordPageComponent } from './components/game-record-page/game-reco
 import { RoutingModule } from './routing.module';
 import { HeaderAdBannerComponent } from './components/header-ad-banner/header-ad-banner.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeaderComponent,
     MatchSectionComponent,
     GameRecordPageComponent,
-    HeaderAdBannerComponent
+    HeaderAdBannerComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
