@@ -8,17 +8,27 @@ import { GameService } from './services/game.service';
 import { HeaderComponent } from './components/header/header.component';
 import { MatchSectionComponent } from './components/match-section/match-section.component';
 import { GameCategoryListService } from './services/game-category-list.service';
+import { GameRecordPageComponent } from './components/game-record-page/game-record-page.component';
+import { RoutingModule } from './routing.module';
+import { HeaderAdBannerComponent } from './components/header-ad-banner/header-ad-banner.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameListComponent,
     HeaderComponent,
-    MatchSectionComponent
+    MatchSectionComponent,
+    GameRecordPageComponent,
+    HeaderAdBannerComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RoutingModule,
+    NgbModule
   ],
   providers: [GameService, 
     GameCategoryListService],

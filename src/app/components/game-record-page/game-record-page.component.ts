@@ -1,0 +1,66 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Game } from 'src/app/common/game/game';
+import { GameCategory } from 'src/app/common/game/game-category';
+import { GameService } from 'src/app/services/game.service';
+
+@Component({
+  selector: 'app-game-record-page',
+  templateUrl: './game-record-page.component.html',
+  styleUrls: ['./game-record-page.component.css']
+})
+export class GameRecordPageComponent implements OnInit {
+
+  recordId: number;
+  game: any;
+  mainGameCategory: GameCategory;
+  alternateGameCategories: GameCategory[] = [];
+  gameCategoryUrl = 'http://localhost:8080/games-by-category/';
+
+  constructor(private route: ActivatedRoute, 
+    private gameService: GameService) { }
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.recordId = +params.get('recordId')!;
+      this.getGameData();
+    });
+    
+  }
+
+  getGameData() {
+    this.gameService.getSingleGame(this.recordId).subscribe(
+      data => {
+        this.game = data;
+      },
+      error => {
+        this.handleError();
+      },
+      () => {
+        this.splitGameCategories();
+      });
+  }
+
+  splitGameCategories() {
+    let iterator = 0;
+    for(let gameCategory of this.game.gameCategories) {
+      if (iterator == 0) {
+        this.mainGameCategory = gameCategory;
+      } else {
+        this.alternateGameCategories.push(gameCategory);
+      }
+      iterator++;
+    }
+  }
+
+  handleError() {
+
+  }
+
+  getGameCategoryUrl(id: any) {
+    let gameCategoryUrlById;
+    gameCategoryUrlById = this.gameCategoryUrl + id;
+    return gameCategoryUrlById;
+  }
+
+}
