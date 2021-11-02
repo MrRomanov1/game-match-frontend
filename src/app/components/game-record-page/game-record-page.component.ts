@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Game } from 'src/app/common/game/game';
 import { GameCategory } from 'src/app/common/game/game-category';
 import { GameService } from 'src/app/services/game.service';
+
+const gameCategoryUrl = '/games-by-category/';
 
 @Component({
   selector: 'app-game-record-page',
@@ -15,7 +16,6 @@ export class GameRecordPageComponent implements OnInit {
   game: any;
   mainGameCategory: GameCategory;
   alternateGameCategories: GameCategory[] = [];
-  gameCategoryUrl = 'http://localhost:8080/games-by-category/';
 
   constructor(private route: ActivatedRoute, 
     private gameService: GameService) { }
@@ -54,12 +54,12 @@ export class GameRecordPageComponent implements OnInit {
   }
 
   handleError() {
-
+    //TODO error handler
   }
 
   getGameCategoryUrl(id: any) {
     let gameCategoryUrlById;
-    gameCategoryUrlById = this.gameCategoryUrl + id;
+    gameCategoryUrlById = gameCategoryUrl + id;
     return gameCategoryUrlById;
   }
 

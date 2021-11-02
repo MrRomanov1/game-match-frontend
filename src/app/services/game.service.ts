@@ -11,12 +11,13 @@ import { GameCategory } from '../common/game/game-category';
 export class GameService {
 
   private baseUrl = 'http://localhost:8080/games';
+  private gameListBaseUrl = 'http://localhost:8080/games-by-category';
 
   constructor(private httpClient: HttpClient) { }
 
-  getGameList(): Observable<Game[]> {
-    return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
-      map(response => response._embedded.games)
+  getGameList(categoryName: any): Observable<Game[]> {
+    return this.httpClient.get<GetResponse>(this.gameListBaseUrl + "/" + categoryName).pipe(
+      map(response => response.games)
     );
   }
 
@@ -26,10 +27,9 @@ export class GameService {
   }
 }
 
-interface GetResponse {
-  _embedded: {
-    games: Game[];
-  }
+interface GetResponse {  
+  games: Game[];
+  
   content: {
     gameCategories: GameCategory[];
   }
