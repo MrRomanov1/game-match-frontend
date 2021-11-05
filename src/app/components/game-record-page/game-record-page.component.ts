@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { GameCategory } from 'src/app/common/game/game-category';
 import { GameService } from 'src/app/services/game.service';
 
-const gameCategoryUrl = '/games-by-category/';
+const gameCategoryUrl = '/games/';
 
 @Component({
   selector: 'app-game-record-page',

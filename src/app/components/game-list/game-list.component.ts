@@ -3,6 +3,7 @@ import { GameService } from 'src/app/services/game.service';
 import { Game } from 'src/app/common/game/game';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
+const gameUrl = '/game/';
 
 @Component({
   selector: 'app-game-list',
@@ -29,7 +30,14 @@ export class GameListComponent implements OnInit {
     this.gameService.getGameList(this.categoryName).subscribe(
       data => {
         this.games = data;
+        console.log(data);
       }
     )
+  }
+
+  getGameUrl(id: any) {
+    let gameCategoryUrlById;
+    gameCategoryUrlById = gameUrl + id;
+    return gameCategoryUrlById;
   }
 }
