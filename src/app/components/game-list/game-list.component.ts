@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { Game } from 'src/app/common/game/game';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
+const gameUrl = '/game/';
 
 @Component({
   selector: 'app-game-list',
@@ -10,19 +12,32 @@ import { Game } from 'src/app/common/game/game';
 })
 export class GameListComponent implements OnInit {
 
+  categoryName: String;
   games: Game[];
 
-  constructor(private gameService: GameService) { }
+  constructor(private route: ActivatedRoute,
+    private gameService: GameService) { }
 
-  ngOnInit(): void {    
-    this.listGames();
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.categoryName = params.get('categoryName')!;
+      this.getGameList();
+    });
+
   }
 
-  listGames() {
-    this.gameService.getGameList().subscribe(
+  getGameList() {
+    this.gameService.getGameList(this.categoryName).subscribe(
       data => {
-        this.games = data;        
+        this.games = data;
+        console.log(data);
       }
     )
+  }
+
+  getGameUrl(id: any) {
+    let gameCategoryUrlById;
+    gameCategoryUrlById = gameUrl + id;
+    return gameCategoryUrlById;
   }
 }

@@ -1,5 +1,5 @@
 export class GameCategory {
-    id: BigInteger;
+    gameCategoryId: BigInteger;
     name: string;
     rating: number;
 }

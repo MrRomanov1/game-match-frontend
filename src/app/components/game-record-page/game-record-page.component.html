@@ -46,11 +46,11 @@
                 <p class="mt-2 mb-0">Data wydania:</p>
                 <p>{{game.releaseDate | date: 'dd LLLL YYYY'}}</p>
                 <p class="mt-2 mb-0">Gatunek:</p>                
-                <a href={{getGameCategoryUrl(mainGameCategory.id)}}>{{mainGameCategory.name}}</a> <!-- lista gatunków -->
+                <a href={{getGameCategoryUrl(mainGameCategory.name)}}>{{mainGameCategory.name}}</a> <!-- lista gatunków -->
                 <!-- TODO -->
                 <p class="mt-2 mb-0">Kategorie:</p>    
                 <div class="d-inline" *ngFor="let tempGameCat of alternateGameCategories">          
-                    <a  href="{{getGameCategoryUrl(tempGameCat.id)}}">{{tempGameCat.name}}</a><span>&#160;&#160;</span><!-- lista kategorii -->       
+                    <a href="{{getGameCategoryUrl(tempGameCat.name)}}">{{tempGameCat.name}}</a><span>&#160;&#160;</span><!-- lista kategorii -->       
                 </div>           
                 <!-- TODO -->
                 <p class="mt-2 mb-0">Tryby gry:</p>
