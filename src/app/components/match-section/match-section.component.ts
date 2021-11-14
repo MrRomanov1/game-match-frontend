@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GameCategoryListService } from 'src/app/services/game-category-list.service';
 import { GameCategory } from 'src/app/common/game/game-category';
 import { Game } from 'src/app/common/game/game';
@@ -27,8 +26,7 @@ export class MatchSectionComponent implements OnInit {
 
   constructor(
     private gameCategoryListService: GameCategoryListService,
-    private gameService: GameService,
-    private modalService: NgbModal) { }
+    private gameService: GameService) { }
 
   ngOnInit(): void {
     this.listGameCategories();
@@ -120,20 +118,18 @@ export class MatchSectionComponent implements OnInit {
   }
 
   /**gameMatch handlers */
-  handleUserMatch(content: any) {
+  handleUserMatch() {
     if (this.selectedItemsSingle.length == 0) {
       this.emptyCategoryMessage = 'Należy wybrać podstawowe kryterium wyszukiwania';
     } else if (this.selectedItemsSingle.length > 0 && this.runAgainFlag == true) {
       this.emptyCategoryMessage = '';
       this.setMatchingCategories();
       try {
-        this.getGamesByUserMatch();                
-        this.modalService.open(content, { size: 'lg' });           
+        this.getGamesByUserMatch();         
       } finally {
         this.runAgainFlag = false;
       }
     } else {
-      this.modalService.open(content, { size: 'lg' });
     }
   }
 }
