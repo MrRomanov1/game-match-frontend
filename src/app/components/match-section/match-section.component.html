@@ -1,27 +1,24 @@
 <section>
-    <div class="container mt-4">        
-            <div class="card">
-                <div class="row">
+    <div class="container mt-4">
+        <div class="card">
+            <div class="row">
                 <div class="card-body col-6"></div>
                 <div class="card-body col-6">
-                    <ng-multiselect-dropdown
-                    class="mx-3"
-                    [placeholder]="'Wybór główny'"
-                    [settings]="dropdownSettingsSingle"
-                    [data]="gameCategories"
-                    (onSelect)="onItemSelectSingle($event)"
-                    (onDeSelect)="onDeSelectSingle()"
-                  >
-                  </ng-multiselect-dropdown>
+                    <ng-multiselect-dropdown class="mx-3" [placeholder]="'Wybór główny'"
+                        [settings]="dropdownSettingsSingle" [data]="gameCategories"
+                        (onSelect)="handleSingleSelect($event)" (onDeSelect)="handleSingleDeselect()">
+                    </ng-multiselect-dropdown>
+                    {{emptyCategoryMessage}}
 
-                    <ng-multiselect-dropdown
-                    [placeholder]="'Wybór opcjonalny'"
-                    [settings]="dropdownSettings"
-                    [data]="gameCategories"
-                    (onSelect)="onItemSelect($event)"
-                    (onDeSelect)="onDeSelect($event)"
-                  >
-                  </ng-multiselect-dropdown>
+                    <ng-multiselect-dropdown class="mx-3" [placeholder]="'Wybór dodatkowy'"
+                        [settings]="dropdownSettings" [data]="gameCategories" (onSelect)="handleSelect($event)"
+                        (onDeSelect)="handleDeselect($event)" (onDeSelectAll)="handleDeselectAll()"
+                        (onSelectAll)="handleSelectAll()">
+                    </ng-multiselect-dropdown>
+
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-primary" type="button" (click)="handleUserMatch(content)">Button</button>
+                    </div>
                     <!--<div class="row">
                         <div *ngFor="let tempGameCategory of gameCategories" class="col-2 d-block px-2 m-2 text-center game-cat-btn" id="btn-{{tempGameCategory.gameCategoryId}}">{{ tempGameCategory.name}}</div>
                     </div>-->
@@ -30,3 +27,32 @@
         </div>
     </div>
 </section>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="gameToShow">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src={{gameToShow.imageUrl}} class="game-cover-img" alt={{gameToShow.title}}>
+                </div>
+                <div class="col-md-8 ms-md-3 p-0">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4 ms-md-2">{{gameToShow.title}}</h3>
+                        <p class="card-text text-justify lead">{{gameToShow.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!gameToShow" class="col-6">
+            Przykro nam, nie znaleźliśmy żadnego dopasowania
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

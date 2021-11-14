@@ -33,3 +33,8 @@
     border-color: black;
     border-width: thick;
   }
+
+  .game-cover-img {
+    width: auto;
+    max-height: 250px;
+  }
