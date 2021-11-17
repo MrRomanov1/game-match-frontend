@@ -15,30 +15,29 @@
                         (onDeSelect)="handleDeselect($event)" (onDeSelectAll)="handleDeselectAll()"
                         (onSelectAll)="handleSelectAll()">
                     </ng-multiselect-dropdown>
-
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <button class="btn btn-primary" type="button" (click)="handleUserMatch()">Button</button>
                     </div>
-                    <!--<div class="row">
-                        <div *ngFor="let tempGameCategory of gameCategories" class="col-2 d-block px-2 m-2 text-center game-cat-btn" id="btn-{{tempGameCategory.gameCategoryId}}">{{ tempGameCategory.name}}</div>
-                    </div>-->
                 </div>
             </div>
-            <div *ngIf="gameToShow" class="collapse-data">
-                <div class="row">
-                    <div class="col-1"></div>
-                    <div class="col-md-2">
-                        <img src={{gameToShow.imageUrl}} class="game-cover-img" alt={{gameToShow.title}}>
-                    </div>
-                    <div class="col-md-7 ms-md-3 p-0">
-                        <div class="card-body">
-                            <h3 class="card-title mb-4 ms-md-2">{{gameToShow.title}}</h3>
-                            <p class="card-text text-justify lead">{{gameToShow.description}}</p>
-                        </div>
-                    </div>
-                    <div *ngIf="!gameToShow" class="col-6">
-                        Przykro nam, nie znaleźliśmy żadnego dopasowania
-                    </div>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <p-carousel [value]="matchedGames" [numVisible]="3" [numScroll]="3" [circular]="false" [showIndicators]="false"
+                        [responsiveOptions]="responsiveOptions">
+                        <ng-template let-game pTemplate="item">
+                            <div class="product-item">
+                                <div class="product-item-content text-center">
+                                    <div class="mx-3">
+                                        <img src="{{game.imageUrl}}" [alt]="game.title" class="game-cover-img" />
+                                    </div>
+                                    <div>
+                                        <h6 class="p-mb-1">{{game.title}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-carousel>
                 </div>
             </div>
         </div>

@@ -12,6 +12,7 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class MatchSectionComponent implements OnInit {
 
+  responsiveOptions: any;
   selectedItemsSingle: GameCategory[] = [];
   selectedItems: GameCategory[] = [];
   dropdownSettingsSingle: IDropdownSettings = {};
@@ -20,40 +21,23 @@ export class MatchSectionComponent implements OnInit {
   emptyCategoryMessage: string = '';
   categoriesToMatch: GameCategory[] = [];
   matchedGames: Game[] = [];
-  gameToShow: Game = new Game;
-  gameIndexToShow: number = 0;
   runAgainFlag: Boolean = true;
 
   constructor(
     private gameCategoryListService: GameCategoryListService,
-    private gameService: GameService) { }
+    private gameService: GameService) {  }
 
   ngOnInit(): void {
     this.listGameCategories();
-
-    this.dropdownSettingsSingle = {
-      singleSelection: true,
-      idField: 'gameCategoryId',
-      textField: 'name',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
-
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'gameCategoryId',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 6,
-      allowSearchFilter: true
-    };
+    this.setDropdownSettings();
+    this.setDropdownSettingsSingle();
+    this.setResponsiveOptions();
   }
 
   listGameCategories() {
     this.gameCategoryListService.getGameCategoryList().subscribe(
       data => {
-        this.gameCategories = data; 
+        this.gameCategories = data;
       }
     )
   }
@@ -61,14 +45,9 @@ export class MatchSectionComponent implements OnInit {
   async getGamesByUserMatch() {
     this.gameService.getGameMatch(this.categoriesToMatch).then(
       async data => {
-        this.matchedGames = await data;                
-        this.setGameToShow();
+        this.matchedGames = await data;
       }
     )
-  }
-
-  setGameToShow() {
-    this.gameToShow = this.matchedGames[this.gameIndexToShow];
   }
 
   setMatchingCategories() {
@@ -125,11 +104,54 @@ export class MatchSectionComponent implements OnInit {
       this.emptyCategoryMessage = '';
       this.setMatchingCategories();
       try {
-        this.getGamesByUserMatch();         
+        this.getGamesByUserMatch();
       } finally {
         this.runAgainFlag = false;
       }
     } else {
     }
+  }
+
+  /**dropdown settings */
+  setDropdownSettings() {
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'gameCategoryId',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 6,
+      allowSearchFilter: true
+    };
+  }
+
+  setDropdownSettingsSingle() {
+    this.dropdownSettingsSingle = {
+      singleSelection: true,
+      idField: 'gameCategoryId',
+      textField: 'name',
+      itemsShowLimit: 1,
+      allowSearchFilter: true
+    };
+  }
+
+  setResponsiveOptions() {
+    this.responsiveOptions = [
+      {
+        breakpoint: '1024px',
+        numVisible: 3,
+        numScroll: 3
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 2,
+        numScroll: 2
+      },
+      {
+        breakpoint: '560px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
   }
 }

@@ -15,6 +15,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SafePipe } from './safe.pipe';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CarouselModule } from 'primeng/carousel';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     HttpClientModule,
     RoutingModule,
     NgbModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    CarouselModule,
+    ButtonModule
   ],
   providers: [GameService, 
     GameCategoryListService],
