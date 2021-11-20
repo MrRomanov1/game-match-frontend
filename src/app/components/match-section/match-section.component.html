@@ -16,28 +16,45 @@
                         (onSelectAll)="handleSelectAll()">
                     </ng-multiselect-dropdown>
                     <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-primary" type="button" (click)="handleUserMatch()">Button</button>
+                        <button class="btn btn-primary" type="button" (click)="handleUserMatch($event)">Button</button>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="matchedGames.length > 0">
                 <div class="col-1"></div>
-                <div class="col-10">
-                    <p-carousel [value]="matchedGames" [numVisible]="3" [numScroll]="3" [circular]="false" [showIndicators]="false"
-                        [responsiveOptions]="responsiveOptions">
+                <div class="col-11">
+                    <p-carousel [value]="matchedGames" [numVisible]="1" [numScroll]="1" [circular]="false"
+                        [showIndicators]="false" [showNavigators]="false"
+                        #primeCarousel>
                         <ng-template let-game pTemplate="item">
-                            <div class="product-item">
-                                <div class="product-item-content text-center">
-                                    <div class="mx-3">
-                                        <img src="{{game.imageUrl}}" [alt]="game.title" class="game-cover-img" />
-                                    </div>
-                                    <div>
-                                        <h6 class="p-mb-1">{{game.title}}</h6>
+                            <div class="card my-5 border-0">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <img src={{game.imageUrl}} class="game-cover-img" alt={{game.title}}>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h3 class="card-title mb-4 ms-md-2">{{game.title}}</h3>
+                                                    <p class="card-text text-justify lead">{{game.description}}</p>
+                                                    <p class="card-text text-justify lead">{{game.gameMatch}} %</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </ng-template>
                     </p-carousel>
+                    <p-carousel-container>
+                        <button class="btn btn-primary" type="button" (click)="handlePrevButtonClick($event)">
+                            (prev)</button>
+                            <button class="btn btn-primary" type="button" (click)="handleOpenGameDetails()">
+                                (showGame)</button>
+                        <button class="btn btn-primary" type="button" (click)="handleNextButtonClick($event)">
+                            (next)</button>
+                    </p-carousel-container>
                 </div>
             </div>
         </div>

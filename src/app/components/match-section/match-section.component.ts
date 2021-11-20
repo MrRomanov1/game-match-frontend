@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { GameCategoryListService } from 'src/app/services/game-category-list.service';
 import { GameCategory } from 'src/app/common/game/game-category';
 import { Game } from 'src/app/common/game/game';
 import { GameService } from 'src/app/services/game.service';
+import { Carousel } from 'primeng/carousel';
 
 @Component({
   selector: 'app-match-section',
@@ -12,7 +13,8 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class MatchSectionComponent implements OnInit {
 
-  responsiveOptions: any;
+  @ViewChild('primeCarousel') primeCarousel: Carousel;
+
   selectedItemsSingle: GameCategory[] = [];
   selectedItems: GameCategory[] = [];
   dropdownSettingsSingle: IDropdownSettings = {};
@@ -23,6 +25,8 @@ export class MatchSectionComponent implements OnInit {
   matchedGames: Game[] = [];
   runAgainFlag: Boolean = true;
 
+  
+
   constructor(
     private gameCategoryListService: GameCategoryListService,
     private gameService: GameService) {  }
@@ -31,7 +35,6 @@ export class MatchSectionComponent implements OnInit {
     this.listGameCategories();
     this.setDropdownSettings();
     this.setDropdownSettingsSingle();
-    this.setResponsiveOptions();
   }
 
   listGameCategories() {
@@ -42,10 +45,11 @@ export class MatchSectionComponent implements OnInit {
     )
   }
 
-  async getGamesByUserMatch() {
+  async getGamesByUserMatch(event: Event) {
     this.gameService.getGameMatch(this.categoriesToMatch).then(
       async data => {
         this.matchedGames = await data;
+        this.primeCarousel.navBackward(event, 0);
       }
     )
   }
@@ -97,14 +101,14 @@ export class MatchSectionComponent implements OnInit {
   }
 
   /**gameMatch handlers */
-  handleUserMatch() {
+  handleUserMatch(event: Event) {
     if (this.selectedItemsSingle.length == 0) {
       this.emptyCategoryMessage = 'Należy wybrać podstawowe kryterium wyszukiwania';
     } else if (this.selectedItemsSingle.length > 0 && this.runAgainFlag == true) {
       this.emptyCategoryMessage = '';
       this.setMatchingCategories();
       try {
-        this.getGamesByUserMatch();
+        this.getGamesByUserMatch(event);
       } finally {
         this.runAgainFlag = false;
       }
@@ -135,23 +139,16 @@ export class MatchSectionComponent implements OnInit {
     };
   }
 
-  setResponsiveOptions() {
-    this.responsiveOptions = [
-      {
-        breakpoint: '1024px',
-        numVisible: 3,
-        numScroll: 3
-      },
-      {
-        breakpoint: '768px',
-        numVisible: 2,
-        numScroll: 2
-      },
-      {
-        breakpoint: '560px',
-        numVisible: 1,
-        numScroll: 1
-      }
-    ];
+  handleNextButtonClick(event: Event) {
+    this.primeCarousel.navForward(event);
+  }
+
+  handlePrevButtonClick(event: Event) {
+    this.primeCarousel.navBackward(event);
+  }
+
+  handleOpenGameDetails() {
+    let gameIndex = this.primeCarousel.firstIndex();
+    window.open('game/' + this.matchedGames[gameIndex].id,  '_blank');
   }
 }
