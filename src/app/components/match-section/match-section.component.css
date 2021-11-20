@@ -6,3 +6,35 @@
   .btn.btn-success {
     float: none;
   }
+
+  .game-cat-btn {
+    background-color: #6610f2;
+    color: white;
+    border-color: #7721f3;
+    border-width: thick;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+
+  .game-cat-btn.active {
+    background-color: #8832f5;
+    color: white;
+    border-color: #7721f3;
+    border-width: thick;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.15s;
+  }
+
+  .game-cat-btn:hover {
+    background-color: #8832f5;
+    color: white;
+    border-color: black;
+    border-width: thick;
+  }
+
+  .game-cover-img {
+    width: auto;
+    max-height: 250px;
+  }

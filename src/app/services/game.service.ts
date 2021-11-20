@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { GameCategory } from '../common/game/game-category';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,7 @@ export class GameService {
 
   private baseUrl = 'http://localhost:8080/games';
   private gameListBaseUrl = 'http://localhost:8080/games-by-category';
+  private gameMatchUrl = 'http://localhost:8080/match'
 
   constructor(private httpClient: HttpClient) { }
 
@@ -19,5 +22,11 @@ export class GameService {
   getSingleGame(recordId: any) {
     this.baseUrl = this.baseUrl + "/" + recordId;
     return this.httpClient.get(this.baseUrl);
+  }
+
+  async getGameMatch(gameCategories: GameCategory[]): Promise<any> {
+    return await this.httpClient.post<GameCategory[]>(this.gameMatchUrl, gameCategories).pipe(
+      map((data: GameCategory[]) => data
+      )).toPromise();
   }
 }

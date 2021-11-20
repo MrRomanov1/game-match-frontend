@@ -13,4 +13,5 @@ export class Game {
     rating: number;
     releaseDate: Date;
     gameCategories: GameCategory[];
+    gameMatch: number;
 }

@@ -9,19 +9,11 @@ import { map } from 'rxjs/operators';
 })
 export class GameCategoryListService {
 
-  private baseUrl = 'http://localhost:8080/api/game-categories';
+  private baseUrl = 'http://localhost:8080/game-categories/all';
 
   constructor(private httpClient: HttpClient) { }
 
-  getGameCategoryList(): Observable<GameCategory[]> {
-    return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
-      map(response => response._embedded.gameCategories)
-    );
-  }
-}
-
-interface GetResponse {
-  _embedded: {
-    gameCategories: GameCategory[];
+  getGameCategoryList(): Observable<any> {
+    return this.httpClient.get(this.baseUrl);
   }
 }
