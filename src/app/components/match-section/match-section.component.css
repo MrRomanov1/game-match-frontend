@@ -38,3 +38,8 @@
     width: auto;
     max-height: 250px;
   }
+
+  .card {
+    background: rgba(34, 37, 42, 0.2);
+    color: white;
+}
