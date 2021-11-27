@@ -3,10 +3,48 @@
     <div class="card my-5 border-0">
         <div class="row">
             <div class="col-10">
+                <p-dataView #dv [value]="games" [paginator]="true" [rows]="9" [sortField]="sortField"
+                    [sortOrder]="sortOrder" layout="grid">
+                    <ng-template pTemplate="header">
+                        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between">
+                            <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price"
+                                (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+                            <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+                                <i class="pi pi-search"></i>
+                                <input type="search" pInputText placeholder="Search by Name">
+                            </span>
+                            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                        </div>
+                    </ng-template>
+                    <ng-template let-game pTemplate="listItem">
+                        <div class="p-col-12">
+                            <div>
+                                <div>
+                                    <div>{{game.title}}</div>
+                                    <div>{{game.description}}</div>
+                                    <p-rating [ngModel]="game.rating" [readonly]="true" [cancel]="false"></p-rating>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-game pTemplate="gridItem">
+                        <div class="p-col-12 p-md-4">
+                            <div class="card">
+                                <div>
+                                    <div class="product-name">{{game.name}}</div>
+                                    <div class="product-description">{{game.description}}</div>
+                                    <p-rating [ngModel]="game.rating" [readonly]="true" [cancel]="false"></p-rating>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-dataView>
                 <div class="row">
                     <div class="card my-3 border-0 d-inline col-3" *ngFor="let tempGame of games">
                         <a href={{getGameUrl(tempGame.id)}}>
-                            <img src={{tempGame.imageUrl}} class="game-cover-img" alt={{tempGame.title}}> <!-- TODO HOVER --> <!-- TODO SMALLER SCREENS -->
+                            <img src={{tempGame.imageUrl}} class="game-cover-img" alt={{tempGame.title}}>
+                            <!-- TODO HOVER -->
+                            <!-- TODO SMALLER SCREENS -->
                         </a>
                         <h5>{{tempGame.title}}</h5>
                     </div>

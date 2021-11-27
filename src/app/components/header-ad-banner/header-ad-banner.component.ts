@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -14,7 +13,7 @@ export class HeaderAdBannerComponent {
   pauseOnIndicator = false;
   pauseOnHover = true;
   pauseOnFocus = true;
-
+/*
   @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
 
 
@@ -35,5 +34,5 @@ export class HeaderAdBannerComponent {
     if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
       this.togglePaused();
     }
-  }
+  }*/
 }

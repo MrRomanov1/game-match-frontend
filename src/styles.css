@@ -4,3 +4,19 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.p-menubar{
+    background: none;
+    border: none !important;
+    color: white !important;
+}
+
+.p-menuitem-text {
+    color: white !important;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.p-menuitem-icon {
+    color: white !important;
+}

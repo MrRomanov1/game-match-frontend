@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { GameListComponent } from './components/game-list/game-list.component';
@@ -11,12 +12,17 @@ import { GameCategoryListService } from './services/game-category-list.service';
 import { GameRecordPageComponent } from './components/game-record-page/game-record-page.component';
 import { RoutingModule } from './routing.module';
 import { HeaderAdBannerComponent } from './components/header-ad-banner/header-ad-banner.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SafePipe } from './safe.pipe';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CarouselModule } from 'primeng/carousel';
-import {ButtonModule} from 'primeng/button';
+import { ButtonModule } from 'primeng/button';
+import { PanelModule } from 'primeng/panel';
+import { DataViewModule } from 'primeng/dataview';
+import {DropdownModule} from 'primeng/dropdown';
+import {MenubarModule} from 'primeng/menubar';
+import {InputTextModule} from 'primeng/inputtext';
+
 
 @NgModule({
   declarations: [
@@ -31,12 +37,17 @@ import {ButtonModule} from 'primeng/button';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     RoutingModule,
-    NgbModule,
     NgMultiSelectDropDownModule,
     CarouselModule,
-    ButtonModule
+    ButtonModule,
+    DataViewModule,
+    PanelModule,
+    DropdownModule,
+    MenubarModule,
+    InputTextModule
   ],
   providers: [GameService, 
     GameCategoryListService],

@@ -6,7 +6,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 const routes: Routes = [
     {path: '', component: HomePageComponent},
     {path: 'game/:recordId', component: GameRecordPageComponent},
-    {path: 'games/:categoryName', component: GameListComponent}
+    {path: 'games/:categoryName', component: GameListComponent},
+    {path: 'games', component: GameListComponent}
     
   ]
 

@@ -1,4 +1,6 @@
+import { style } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  items: MenuItem[];
+
   constructor() { }
 
   ngOnInit(): void {
+    this.setMenuItems();
   }
 
+  setMenuItems() {
+    this.items = [
+      {
+        label: 'Wszystkie',
+        icon: 'pi pi-list',
+        routerLink: 'games',
+        styleClass: 'p-text-bold'
+      }
+    ];
+  }
 }
