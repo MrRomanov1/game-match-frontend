@@ -1,6 +1,8 @@
 <p-menubar [model]="items" styleClass="nav-menu" [style]="{'background': 'none'}">
   <ng-template pTemplate="start">
-    <img src="/assets/static_resources/logo.svg" height="40" class="page-logo p-mr-2">
+    <a href="/">
+      <img src="/assets/static_resources/logo.svg" height="40" class="page-logo p-mr-2">
+    </a>    
   </ng-template>
   <ng-template pTemplate="end">
     <input type="text" pInputText placeholder="Search">

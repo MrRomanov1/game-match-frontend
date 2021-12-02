@@ -22,6 +22,9 @@ import { DataViewModule } from 'primeng/dataview';
 import {DropdownModule} from 'primeng/dropdown';
 import {MenubarModule} from 'primeng/menubar';
 import {InputTextModule} from 'primeng/inputtext';
+import {CardModule} from 'primeng/card';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {TabViewModule} from 'primeng/tabview';
 
 
 @NgModule({
@@ -47,7 +50,10 @@ import {InputTextModule} from 'primeng/inputtext';
     PanelModule,
     DropdownModule,
     MenubarModule,
-    InputTextModule
+    InputTextModule,
+    CardModule,
+    MultiSelectModule,
+    TabViewModule
   ],
   providers: [GameService, 
     GameCategoryListService],

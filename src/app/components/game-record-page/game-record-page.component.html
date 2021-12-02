@@ -1,20 +1,21 @@
 <app-header-ad-banner></app-header-ad-banner>
-<div class="container">
-    <div class="card my-5 px-3 py-3 border-0 record-page-card">
-        <div class="row">
+<div class="grid">
+    <div class="col-1"></div>
+    <p-card class="my-5 px-3 py-3 border-0 record-page-card col-10">
+        <div class="grid">
             <div class="col-10">
-                <div class="row">                    
-                    <div class="col-md-2">
+                <div class="grid">                    
+                    <div class="col-2">
                         <img src={{game.imageUrl}} class="game-cover-img" alt={{game.title}}>
                     </div>
-                    <div class="col-md-9 ms-md-3">
+                    <div class="col-9 ms-md-3">
                         <div class="card-body">
                             <h3 class="card-title mb-4 ms-md-2">{{game.title}}</h3>
                             <p class="card-text text-justify lead">{{game.description}}</p>
                         </div>
                     </div>
                 </div>
-                <div class="row mt-5">                    
+                <div class="grid mt-5">                    
                     <div class="col-12 col-md-11">
                         <h3 class="mb-4">Trailer</h3>
                         <div class="embed-responsive embed-responsive-16by9">
@@ -26,13 +27,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-5" *ngIf="game.descriptionFirst">                    
+                <div class="grid mt-5" *ngIf="game.descriptionFirst">                    
                     <div class="col-12 col-md-11">
                         <h3 class="mb-4">{{game.descriptionFirstHeader}}</h3>
                         <p class="text-justify lead">{{game.descriptionFirst}}</p>
                     </div>
                 </div>
-                <div class="row mt-5" *ngIf="game.systemMinimumRequirements || game.systemRecommendedRequirements">
+                <div class="grid mt-5" *ngIf="game.systemMinimumRequirements || game.systemRecommendedRequirements">
                     <div class="col-12 col-md-11">
                         <h4 class="mb-4">Wymagania sprzętowe</h4>
                         <p class="text-justify" *ngIf="game.systemMinimumRequirements"><strong>MINIMALNE:</strong> {{game.systemMinimumRequirements}}</p>
@@ -61,5 +62,5 @@
                 <h5 class="my-4">PODOBNE GRY</h5>
             </div>
         </div>
-    </div>
+    </p-card>
 </div>

@@ -1,9 +1,41 @@
 <section>
-    <div class="container mt-4">
-        <div class="card">
-            <div class="row">
-                <div class="card-body col-6"></div>
-                <div class="card-body col-6">
+    <div class="grid mt-5">
+        <div class="col-1"></div>
+        <p-card class="card mt-5 col-10">
+            <div class="grid">
+                <div class="col-12">
+                    <p-tabView>
+                        <p-tabPanel header="Platformy">
+                            Coming Soon
+                        </p-tabPanel>
+                        <p-tabPanel header="Kategorie">
+                            <button pButton type="button" label={{category.name}}
+                                value={{category.gameCategoryId}}
+                                class="mx-1 my-1 p-button-raised p-button-rounded"
+                                *ngFor="let category of gameCategories"
+                                [ngClass]="category.matchButtonClassField"
+                                (click)="handleCategoryButtonClick(category)"
+                                ></button>
+                        </p-tabPanel>
+                        <p-tabPanel header="Tryby Gry">
+                            Coming Soon
+                        </p-tabPanel>
+                        <p-tabPanel header="Lata Wydania">
+                            Coming Soon
+                        </p-tabPanel>
+                        <p-tabPanel header="Oceny">
+                            Coming Soon
+                        </p-tabPanel>
+                        <p-tabPanel header="Wydawcy">
+                            Coming Soon
+                        </p-tabPanel>
+                        <p-tabPanel header="Inne">
+                            Coming Soon
+                        </p-tabPanel>
+                    </p-tabView>
+                </div>
+                <!--<div class="col-6"></div>
+                <div class="col-6">
                     <ng-multiselect-dropdown class="mx-3" [placeholder]="'Wybór główny'"
                         [settings]="dropdownSettingsSingle" [data]="gameCategories"
                         (onSelect)="handleSingleSelect($event)" (onDeSelect)="handleSingleDeselect()">
@@ -18,23 +50,22 @@
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <button class="btn btn-primary" type="button" (click)="handleUserMatch($event)">Button</button>
                     </div>
-                </div>
+                </div>-->
             </div>
-            <div class="row" *ngIf="matchedGames.length > 0">
+            <div class="grid" *ngIf="matchedGames.length > 0">
                 <div class="col-1"></div>
                 <div class="col-11">
                     <p-carousel [value]="matchedGames" [numVisible]="1" [numScroll]="1" [circular]="false"
-                        [showIndicators]="false" [showNavigators]="false"
-                        #primeCarousel>
+                        [showIndicators]="false" [showNavigators]="false" #primeCarousel>
                         <ng-template let-game pTemplate="item">
                             <div class="card my-5 border-0">
-                                <div class="row">
+                                <div class="grid">
                                     <div class="col-10">
-                                        <div class="row">
-                                            <div class="col-md-4">
+                                        <div class="grid">
+                                            <div class="col-4">
                                                 <img src={{game.imageUrl}} class="game-cover-img" alt={{game.title}}>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-8">
                                                 <div class="card-body">
                                                     <h3 class="card-title mb-4 ms-md-2">{{game.title}}</h3>
                                                     <p class="card-text text-justify lead">{{game.description}}</p>
@@ -50,13 +81,13 @@
                     <p-carousel-container>
                         <button class="btn btn-primary" type="button" (click)="handlePrevButtonClick($event)">
                             (prev)</button>
-                            <button class="btn btn-primary" type="button" (click)="handleOpenGameDetails()">
-                                (showGame)</button>
+                        <button class="btn btn-primary" type="button" (click)="handleOpenGameDetails()">
+                            (showGame)</button>
                         <button class="btn btn-primary" type="button" (click)="handleNextButtonClick($event)">
                             (next)</button>
                     </p-carousel-container>
                 </div>
             </div>
-        </div>
+        </p-card>
     </div>
 </section>

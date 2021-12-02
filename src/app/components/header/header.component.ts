@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   setMenuItems() {
     this.items = [
       {
-        label: 'Wszystkie',
+        label: 'Lista gier',
         icon: 'pi pi-list',
         routerLink: 'games',
         styleClass: 'p-text-bold'

@@ -5,6 +5,7 @@ import { GameCategory } from 'src/app/common/game/game-category';
 import { Game } from 'src/app/common/game/game';
 import { GameService } from 'src/app/services/game.service';
 import { Carousel } from 'primeng/carousel';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-match-section',
@@ -150,5 +151,18 @@ export class MatchSectionComponent implements OnInit {
   handleOpenGameDetails() {
     let gameIndex = this.primeCarousel.firstIndex();
     window.open('game/' + this.matchedGames[gameIndex].id,  '_blank');
+  }
+
+  handleCategoryButtonClick(category: GameCategory) {
+    //this.gameCategories.push(category);
+    if (category.matchButtonClassField == "button-test") {
+      category.matchButtonClassField = "";
+      this.handleDeselect(category);
+      console.log(this.selectedItems);
+    } else {
+      category.matchButtonClassField = "button-test";
+      this.handleSelect(category);
+      console.log(this.selectedItems);
+    }
   }
 }

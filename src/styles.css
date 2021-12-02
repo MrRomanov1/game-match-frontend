@@ -20,3 +20,24 @@ body {
 .p-menuitem-icon {
     color: white !important;
 }
+
+.p-card{
+    background: rgba(34, 37, 42, 0.2) !important;
+    color: white !important;
+}
+
+.p-tabview-panels{
+    background: none !important;
+}
+
+.p-tabview-nav {
+    background: none !important;
+}
+
+.p-tabview-nav-link {
+    background: none !important;
+}
+
+.button-test{
+    background: black !important;
+}
