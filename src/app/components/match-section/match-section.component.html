@@ -1,7 +1,9 @@
 <section>
-    <div class="grid mt-5">
-        <div class="col-1"></div>
-        <p-card class="card mt-5 col-10">
+    <div class="grid mt-5">        
+        <p-card class="card col-8 col-offset-2">
+            <ng-template pTemplate="header">
+                <h2 class="mx-3 pt-3">Dopasuj grę do się</h2>
+            </ng-template>
             <div class="grid">
                 <div class="col-12">
                     <p-tabView>
@@ -9,13 +11,10 @@
                             Coming Soon
                         </p-tabPanel>
                         <p-tabPanel header="Kategorie">
-                            <button pButton type="button" label={{category.name}}
-                                value={{category.gameCategoryId}}
-                                class="mx-1 my-1 p-button-raised p-button-rounded"
-                                *ngFor="let category of gameCategories"
-                                [ngClass]="category.matchButtonClassField"
-                                (click)="handleCategoryButtonClick(category)"
-                                ></button>
+                            <button pButton type="button" label={{category.name}} value={{category.gameCategoryId}}
+                                class="button-match mx-1 my-1 p-button-raised p-button-rounded"
+                                *ngFor="let category of gameCategories" [ngClass]="category.matchButtonClassField"
+                                (click)="handleCategoryButtonClick(category)"></button>
                         </p-tabPanel>
                         <p-tabPanel header="Tryby Gry">
                             Coming Soon
@@ -51,6 +50,11 @@
                         <button class="btn btn-primary" type="button" (click)="handleUserMatch($event)">Button</button>
                     </div>
                 </div>-->
+            </div>
+            <div class="grid" *ngIf="sectionButtons.length > 0">
+                <button pButton type="button" icon="pi pi-times" label={{button.recordName}} value={{button.recordId}}
+                    class="mx-1 my-1 p-button-raised p-button-rounded" *ngFor="let button of sectionButtons"
+                    (click)="handleSectionButtonClick(button)"></button>
             </div>
             <div class="grid" *ngIf="matchedGames.length > 0">
                 <div class="col-1"></div>

@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { GameCategoryListService } from 'src/app/services/game-category-list.service';
 import { GameCategory } from 'src/app/common/game/game-category';
 import { Game } from 'src/app/common/game/game';
 import { GameService } from 'src/app/services/game.service';
 import { Carousel } from 'primeng/carousel';
-import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-match-section',
@@ -16,26 +14,30 @@ export class MatchSectionComponent implements OnInit {
 
   @ViewChild('primeCarousel') primeCarousel: Carousel;
 
+  /** selected items */
   selectedItemsSingle: GameCategory[] = [];
   selectedItems: GameCategory[] = [];
-  dropdownSettingsSingle: IDropdownSettings = {};
-  dropdownSettings: IDropdownSettings = {};
-  gameCategories: GameCategory[] = [];
-  emptyCategoryMessage: string = '';
-  categoriesToMatch: GameCategory[] = [];
-  matchedGames: Game[] = [];
-  runAgainFlag: Boolean = true;
+  sectionButtons: ButtonWrapper[] = [];
 
-  
+  /** utils */
+  runAgainFlag: Boolean = true;
+  emptyCategoryMessage: string = '';
+
+  /** initial values */
+  gameCategories: GameCategory[] = [];
+
+  /** endpoint values */
+  categoriesToMatch: GameCategory[] = [];
+
+  /** output values */
+  matchedGames: Game[] = [];
 
   constructor(
     private gameCategoryListService: GameCategoryListService,
-    private gameService: GameService) {  }
+    private gameService: GameService) { }
 
   ngOnInit(): void {
     this.listGameCategories();
-    this.setDropdownSettings();
-    this.setDropdownSettingsSingle();
   }
 
   listGameCategories() {
@@ -65,41 +67,8 @@ export class MatchSectionComponent implements OnInit {
     });
   }
 
-  /**single multiselect dropdown handlers*/
-  handleSingleSelect(item: any) {
-    this.selectedItemsSingle = [];
-    this.selectedItemsSingle.push(item);
-    this.runAgainFlag = true;
-  }
-
-  handleSingleDeselect() {
-    this.selectedItemsSingle = [];
-    this.runAgainFlag = true;
-  }
-
   /**multiple multiselect dropdown handlers*/
-  handleSelect(item: any) {
-    this.selectedItems.push(item);
-    this.runAgainFlag = true;
-  }
 
-  handleDeselect(item: any) {
-    this.selectedItems.forEach((value, index) => {
-      if (value.gameCategoryId == item.gameCategoryId) this.selectedItems.splice(index, 1);
-    });
-    this.runAgainFlag = true;
-  }
-
-  handleDeselectAll() {
-    this.selectedItems = [];
-    this.runAgainFlag = true;
-  }
-
-  handleSelectAll() {
-    this.selectedItems = [];
-    this.selectedItems = this.gameCategories;
-    this.runAgainFlag = true;
-  }
 
   /**gameMatch handlers */
   handleUserMatch(event: Event) {
@@ -117,29 +86,58 @@ export class MatchSectionComponent implements OnInit {
     }
   }
 
-  /**dropdown settings */
-  setDropdownSettings() {
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'gameCategoryId',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 6,
-      allowSearchFilter: true
-    };
+  /**item selection handlers */
+  handleSelectCategory(item: ButtonWrapper, category: GameCategory) {
+    this.sectionButtons.push(item);
+    this.categoriesToMatch.push(category);
+    this.runAgainFlag = true;
   }
 
-  setDropdownSettingsSingle() {
-    this.dropdownSettingsSingle = {
-      singleSelection: true,
-      idField: 'gameCategoryId',
-      textField: 'name',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
+  handleDeselectCategory(item: ButtonWrapper, category: GameCategory) {
+    this.categoriesToMatch.forEach((value, index) => {
+      if (value.gameCategoryId == category.gameCategoryId) {
+        this.categoriesToMatch.splice(index, 1);
+      }
+    });
+    this.sectionButtons.forEach((value, index) => {
+      if ((value.recordName + value.recordId) == (item.recordName + item.recordId)) {
+        this.sectionButtons.splice(index, 1);
+      }
+    });
+    this.runAgainFlag = true;
   }
 
+  handleCategoryButtonClick(category: GameCategory) {
+    //this.gameCategories.push(category);
+    if (category.matchButtonClassField == "button-match-active") {
+      category.matchButtonClassField = "";
+      let sectionButton = new ButtonWrapper("GameCategory", category.name, category.gameCategoryId);
+      this.handleDeselectCategory(sectionButton, category);
+    } else {
+      category.matchButtonClassField = "button-match-active";
+      let sectionButton = new ButtonWrapper("GameCategory", category.name, category.gameCategoryId);
+      this.handleSelectCategory(sectionButton, category);
+    }
+  }
+
+  handleSectionButtonClick(sectionButton: ButtonWrapper) {
+    this.sectionButtons.forEach((value, index) => {
+      if ((value.recordName + value.recordId) == (sectionButton.recordName + sectionButton.recordId)) {
+        this.sectionButtons.splice(index, 1);
+      }
+    });
+    if (sectionButton.objectType == "GameCategory") {
+      this.gameCategories.forEach((value, index) => {
+        if ((value.name + value.gameCategoryId) == (sectionButton.recordName + sectionButton.recordId)) {
+          this.gameCategories[index].matchButtonClassField = "";
+        }
+      });
+    }
+
+    this.runAgainFlag = true;
+  }
+
+  /**carousel handlers */
   handleNextButtonClick(event: Event) {
     this.primeCarousel.navForward(event);
   }
@@ -150,19 +148,18 @@ export class MatchSectionComponent implements OnInit {
 
   handleOpenGameDetails() {
     let gameIndex = this.primeCarousel.firstIndex();
-    window.open('game/' + this.matchedGames[gameIndex].id,  '_blank');
+    window.open('game/' + this.matchedGames[gameIndex].id, '_blank');
   }
+}
 
-  handleCategoryButtonClick(category: GameCategory) {
-    //this.gameCategories.push(category);
-    if (category.matchButtonClassField == "button-test") {
-      category.matchButtonClassField = "";
-      this.handleDeselect(category);
-      console.log(this.selectedItems);
-    } else {
-      category.matchButtonClassField = "button-test";
-      this.handleSelect(category);
-      console.log(this.selectedItems);
-    }
+export class ButtonWrapper {
+  objectType: string;
+  recordName: string;
+  recordId: BigInteger;
+
+  constructor(objectType: string, recordName: string, recordId: BigInteger) {
+    this.objectType = objectType;
+    this.recordName = recordName;
+    this.recordId = recordId;
   }
 }

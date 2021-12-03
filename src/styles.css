@@ -38,6 +38,15 @@ body {
     background: none !important;
 }
 
-.button-test{
-    background: black !important;
+.button-match{
+    background-color: rgba(10, 189, 139, 0.9) !important;
+    border: none !important;
+}
+
+.button-match:hover{
+    background-color: rgb(13, 128, 95) !important;
+}
+
+.button-match-active{
+    background: none !important;
 }
