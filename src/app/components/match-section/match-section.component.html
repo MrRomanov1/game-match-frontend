@@ -21,7 +21,8 @@
                         <p-tabPanel header="Tryby Gry">
                             <button pButton type="button" label={{gameMode.name}} value={{gameMode.id}}
                             class="button-match mx-1 my-1 p-button-raised p-button-rounded"
-                            *ngFor="let gameMode of gameModes"></button>
+                            *ngFor="let gameMode of gameModes" [ngClass]="gameMode.matchButtonClassField"
+                            (click)="handleModeButtonClick(gameMode)"></button>
                         </p-tabPanel>
                         <p-tabPanel header="Data Wydania">
                             Coming Soon

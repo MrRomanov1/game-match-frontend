@@ -1,7 +1,8 @@
 export class Platform {
     id: BigInteger;
-    name: String;
-    icon: String;
+    name: string;
+    icon: string;
     order: number;
-    type: String;
+    type: string;    
+    matchButtonClassField: string;
 }

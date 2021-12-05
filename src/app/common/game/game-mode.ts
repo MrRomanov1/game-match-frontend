@@ -1,4 +1,5 @@
 export class GameMode {
     id: BigInteger;
-    name: String;
+    name: string;    
+    matchButtonClassField: string;
 }
