@@ -25,6 +25,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {CardModule} from 'primeng/card';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {TabViewModule} from 'primeng/tabview';
+import { GameMatchListComponent } from './components/game-match-list/game-match-list.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {TabViewModule} from 'primeng/tabview';
     GameRecordPageComponent,
     HeaderAdBannerComponent,
     SafePipe,
-    HomePageComponent
+    HomePageComponent,
+    GameMatchListComponent
   ],
   imports: [
     BrowserModule,

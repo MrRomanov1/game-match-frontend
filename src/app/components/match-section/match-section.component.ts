@@ -15,13 +15,11 @@ export class MatchSectionComponent implements OnInit {
   @ViewChild('primeCarousel') primeCarousel: Carousel;
 
   /** selected items */
-  selectedItemsSingle: GameCategory[] = [];
   selectedItems: GameCategory[] = [];
   sectionButtons: ButtonWrapper[] = [];
 
   /** utils */
   runAgainFlag: Boolean = true;
-  emptyCategoryMessage: string = '';
 
   /** initial values */
   gameCategories: GameCategory[] = [];
@@ -48,41 +46,22 @@ export class MatchSectionComponent implements OnInit {
     )
   }
 
-  async getGamesByUserMatch(event: Event) {
+  async getGamesByUserMatch() {
     this.gameService.getGameMatch(this.categoriesToMatch).then(
       async data => {
         this.matchedGames = await data;
-        this.primeCarousel.navBackward(event, 0);
       }
     )
   }
 
-  setMatchingCategories() {
-    this.categoriesToMatch = [];
-    this.selectedItemsSingle.forEach((value) => {
-      this.categoriesToMatch.push(value);
-    });
-    this.selectedItems.forEach((value) => {
-      this.categoriesToMatch.push(value);
-    });
-  }
-
-  /**multiple multiselect dropdown handlers*/
-
-
   /**gameMatch handlers */
-  handleUserMatch(event: Event) {
-    if (this.selectedItemsSingle.length == 0) {
-      this.emptyCategoryMessage = 'Należy wybrać podstawowe kryterium wyszukiwania';
-    } else if (this.selectedItemsSingle.length > 0 && this.runAgainFlag == true) {
-      this.emptyCategoryMessage = '';
-      this.setMatchingCategories();
+  handleUserMatch() {
+    if (this.sectionButtons.length > 0 && this.runAgainFlag == true) {
       try {
-        this.getGamesByUserMatch(event);
+        this.getGamesByUserMatch();
       } finally {
         this.runAgainFlag = false;
       }
-    } else {
     }
   }
 
@@ -133,22 +112,7 @@ export class MatchSectionComponent implements OnInit {
         }
       });
     }
-
     this.runAgainFlag = true;
-  }
-
-  /**carousel handlers */
-  handleNextButtonClick(event: Event) {
-    this.primeCarousel.navForward(event);
-  }
-
-  handlePrevButtonClick(event: Event) {
-    this.primeCarousel.navBackward(event);
-  }
-
-  handleOpenGameDetails() {
-    let gameIndex = this.primeCarousel.firstIndex();
-    window.open('game/' + this.matchedGames[gameIndex].id, '_blank');
   }
 }
 
