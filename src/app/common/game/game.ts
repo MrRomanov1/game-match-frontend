@@ -1,4 +1,6 @@
+import { Platform } from "@angular/cdk/platform";
 import { GameCategory } from "./game-category";
+import { GameMode } from "./game-mode";
 
 export class Game {
     id: BigInteger;
@@ -13,5 +15,7 @@ export class Game {
     rating: number;
     releaseDate: Date;
     gameCategories: GameCategory[];
+    gameModes: GameMode[];
+    platforms: Platform[];
     gameMatch: number;
 }
