@@ -4,6 +4,10 @@ import { GameCategory } from 'src/app/common/game/game-category';
 import { Game } from 'src/app/common/game/game';
 import { GameService } from 'src/app/services/game.service';
 import { Carousel } from 'primeng/carousel';
+import { Platform } from 'src/app/common/game/platform';
+import { GameMode } from 'src/app/common/game/game-mode';
+import { GameModeService } from 'src/app/services/game-mode.service';
+import { PlatformService } from 'src/app/services/platform.service';
 
 @Component({
   selector: 'app-match-section',
@@ -23,6 +27,8 @@ export class MatchSectionComponent implements OnInit {
 
   /** initial values */
   gameCategories: GameCategory[] = [];
+  platforms: Platform[] = [];
+  gameModes: GameMode[] = [];
 
   /** endpoint values */
   categoriesToMatch: GameCategory[] = [];
@@ -32,13 +38,18 @@ export class MatchSectionComponent implements OnInit {
 
   constructor(
     private gameCategoryListService: GameCategoryListService,
-    private gameService: GameService) { }
+    private gameService: GameService,
+    private gameModeService: GameModeService,
+    private platformService: PlatformService) { }
 
   ngOnInit(): void {
-    this.listGameCategories();
+    this.getGameCategories();
+    this.getPlatforms();
+    this.getGameModes();
   }
 
-  listGameCategories() {
+  /** initial callouts */
+  getGameCategories() {
     this.gameCategoryListService.getGameCategoryList().subscribe(
       data => {
         this.gameCategories = data;
@@ -46,10 +57,19 @@ export class MatchSectionComponent implements OnInit {
     )
   }
 
-  async getGamesByUserMatch() {
-    this.gameService.getGameMatch(this.categoriesToMatch).then(
-      async data => {
-        this.matchedGames = await data;
+  getPlatforms() {
+    this.platformService.getPlatformList().subscribe(
+      data => {
+        this.platforms = data;
+        console.log(JSON.parse(JSON.stringify(data)));
+      }
+    )
+  }
+
+  getGameModes() {
+    this.gameModeService.getGameModesList().subscribe(
+      data => {
+        this.gameModes = data;
       }
     )
   }
@@ -63,6 +83,14 @@ export class MatchSectionComponent implements OnInit {
         this.runAgainFlag = false;
       }
     }
+  }
+  
+  async getGamesByUserMatch() {
+    this.gameService.getGameMatch(this.categoriesToMatch).then(
+      async data => {
+        this.matchedGames = await data;
+      }
+    )
   }
 
   /**item selection handlers */

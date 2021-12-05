@@ -8,7 +8,9 @@
                 <div class="col-12">
                     <p-tabView>
                         <p-tabPanel header="Platformy">
-                            Coming Soon
+                            <button pButton type="button" label={{platform.name}} value={{platform.id}}
+                                class="button-match mx-1 my-1 p-button-raised p-button-rounded"
+                                *ngFor="let platform of platforms"></button>
                         </p-tabPanel>
                         <p-tabPanel header="Kategorie">
                             <button pButton type="button" label={{category.name}} value={{category.gameCategoryId}}
@@ -17,7 +19,9 @@
                                 (click)="handleCategoryButtonClick(category)"></button>
                         </p-tabPanel>
                         <p-tabPanel header="Tryby Gry">
-                            Coming Soon
+                            <button pButton type="button" label={{gameMode.name}} value={{gameMode.id}}
+                            class="button-match mx-1 my-1 p-button-raised p-button-rounded"
+                            *ngFor="let gameMode of gameModes"></button>
                         </p-tabPanel>
                         <p-tabPanel header="Data Wydania">
                             Coming Soon
