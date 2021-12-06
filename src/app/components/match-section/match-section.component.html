@@ -10,7 +10,8 @@
                         <p-tabPanel header="Platformy">
                             <button pButton type="button" label={{platform.name}} value={{platform.id}}
                                 class="button-match mx-1 my-1 p-button-raised p-button-rounded"
-                                *ngFor="let platform of platforms"></button>
+                                *ngFor="let platform of platforms" [ngClass]="platform.matchButtonClassField"
+                                (click)="handlePlatformButtonClick(platform)"></button>
                         </p-tabPanel>
                         <p-tabPanel header="Kategorie">
                             <button pButton type="button" label={{category.name}} value={{category.gameCategoryId}}
