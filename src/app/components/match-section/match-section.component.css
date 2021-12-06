@@ -1,40 +1,37 @@
-.btn-group {
-    white-space: nowrap;
-  }
-  
-  .btn.btn-primary,
-  .btn.btn-success {
-    float: none;
-  }
+.game-cover-img {
+  width: auto;
+  max-height: 250px;
+}
 
-  .game-cat-btn {
-    background-color: #6610f2;
-    color: white;
-    border-color: #7721f3;
-    border-width: thick;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.15s;
-  }
+.platform-block{
+  display: inline-block;
+  color: white;
+  text-align: center;
+}
 
-  .game-cat-btn.active {
-    background-color: #8832f5;
-    color: white;
-    border-color: #7721f3;
-    border-width: thick;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.15s;
-  }
+.platform-box {
+  width: 80px;
+  height: 90px;
+  border-style: solid;
+  border-width: 1px; 
+  border-color: black;
+  border-radius: 10%;
+  background-color: rgba(10, 189, 139, 0.9);
+}
 
-  .game-cat-btn:hover {
-    background-color: #8832f5;
-    color: white;
-    border-color: black;
-    border-width: thick;
-  }
+.platform-box:hover {
+  background-color: rgb(29, 39, 33);
+}
 
-  .game-cover-img {
-    width: auto;
-    max-height: 250px;
-  }
+.platform-text{
+  margin-top: 5px;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.platform-icon {
+  position: relative;
+  margin-top: 10px;
+  width: 50px;
+  height: 50px;
+}

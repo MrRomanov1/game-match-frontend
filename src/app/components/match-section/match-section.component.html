@@ -8,6 +8,14 @@
                 <div class="col-12">
                     <p-tabView>
                         <p-tabPanel header="Platformy">
+                            <div *ngFor="let platform of platforms" class="platform-block text-center">
+                                <div class="platform-box mx-2 my-2">
+                                    <img src={{platform.icon}} class="platform-icon">
+                                    <p class="platform-text">{{platform.name}}</p>
+                                </div>
+                                
+                            </div>
+                            
                             <button pButton type="button" label={{platform.name}} value={{platform.id}}
                                 class="button-match mx-1 my-1 p-button-raised p-button-rounded"
                                 *ngFor="let platform of platforms" [ngClass]="platform.matchButtonClassField"
