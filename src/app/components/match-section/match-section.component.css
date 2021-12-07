@@ -21,6 +21,7 @@
 
 .platform-box:hover {
   background-color: rgb(29, 39, 33);
+  cursor: pointer;
 }
 
 .platform-text{

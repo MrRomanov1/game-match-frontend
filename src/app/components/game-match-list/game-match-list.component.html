@@ -1,5 +1,55 @@
-<p>game-match-list works!</p>
-<div *ngFor="let game of matchedGames">
-    <p>{{game.id}}</p>
-    <p>{{game.title}}</p>
-</div>
+<div class="card">
+    <p-dataView #dv [value]="matchedGames" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField"
+        [sortOrder]="sortOrder" layout="grid">
+        <ng-template pTemplate="header">
+            <div class="d-flex flex-column flex-md-row jc-md-between">
+                <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price"
+                    (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+                <span class="input-icon-left p-mb-2 p-mb-md-0">
+                    <i class="pi pi-search"></i>
+                    <input type="search" pInputText placeholder="Search by Name">
+                </span>
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+        </ng-template>
+        <ng-template let-game pTemplate="listItem">
+            <div class="col-12">
+                <div class="product-list-item">
+                    <img src={{game.imageUrl}} [alt]="game.name" />
+                    <div class="product-list-detail">
+                        <div class="product-name">{{game.name}}</div>
+                        <i class="pi pi-tag product-category-icon"></i><span class="product-category">KATEGORIA</span>
+                    </div>
+                    <div class="product-list-action">
+                        <span class="product-price">CENA + {{game.name}}</span>
+                        <p-button icon="pi pi-shopping-cart" label="Add to Cart"></p-button>
+                        <span>STATUS?</span>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-game pTemplate="gridItem">
+            <div class="col-4 px-3 py-3">
+                <div class="product-grid-item p-card">
+                    <div class="product-grid-item-top">
+                        <div>
+                            <p-chip label="KATEGORIA" icon="pi pi-tag d-block"></p-chip>
+                        </div>
+                        <div>
+                            <p-chip label="PLATFORMY" icon="pi pi-tag d-block"></p-chip>
+                        </div>
+                        <span>STATUS?</span>
+                    </div>
+                    <div class="product-grid-item-content">
+                        <img src={{game.imageUrl}} class="game-cover-img" [alt]="game.title" />
+                        <div class="product-name">{{game.title}}</div>
+
+                    </div>
+                    <div class="product-grid-item-bottom">
+                        <span class="product-price">CENA</span>
+                        <p-button icon="pi pi-shopping-cart"></p-button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>

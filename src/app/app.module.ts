@@ -26,7 +26,9 @@ import {CardModule} from 'primeng/card';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {TabViewModule} from 'primeng/tabview';
 import { GameMatchListComponent } from './components/game-match-list/game-match-list.component';
-
+import {RatingModule} from 'primeng/rating';
+import {DialogModule} from 'primeng/dialog';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,10 @@ import { GameMatchListComponent } from './components/game-match-list/game-match-
     InputTextModule,
     CardModule,
     MultiSelectModule,
-    TabViewModule
+    TabViewModule,
+    RatingModule,
+    DialogModule,
+    ChipModule
   ],
   providers: [GameService, 
     GameCategoryListService],
