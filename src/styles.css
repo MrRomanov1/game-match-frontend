@@ -50,3 +50,49 @@ body {
 .button-match-active{
     background: none !important;
 }
+
+.p-chip {
+    background: none !important;
+    color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+.p-chip-text {
+    font-size: 12px !important;
+}
+
+.p-dataview {
+    background: none !important;
+}
+
+.p-dataview-header {
+    background: none !important;
+}
+
+.p-dataview-content {
+    background: none !important;
+}
+
+.p-paginator-bottom {
+    background: none !important;
+}
+
+.match-button-left {
+    float: left !important;
+}
+
+.match-button-right {
+    float: right !important;
+}
+
+.match-platform-button {
+    background: none !important;
+    height: 1.6rem !important;
+    width: 1.6rem !important; 
+}
+
+.match-platform-button > span {
+    font-size: 12px !important;    
+}

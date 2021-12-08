@@ -1,5 +1,12 @@
 .game-cover-img {
-    max-width: 200px;
-    height: 300px;
-    display: inline-block;
-  }
+  max-width: 200px;
+  height: 300px;
+  display: inline-block;
+}  
+
+.match-grid-item-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* Centering y-axis */
+  align-items :center;
+}

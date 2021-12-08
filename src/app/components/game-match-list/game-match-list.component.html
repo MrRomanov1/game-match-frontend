@@ -22,32 +22,33 @@
                     </div>
                     <div class="product-list-action">
                         <span class="product-price">CENA + {{game.name}}</span>
-                        <p-button icon="pi pi-shopping-cart" label="Add to Cart"></p-button>
-                        <span>STATUS?</span>
+                        <button pButton icon="pi pi-eye-slash" type="button" class="p-button-raised p-button-rounded"></button>
+                        <button pButton icon="pi pi-bookmark" type="button" class="p-button-raised p-button-rounded"></button>
                     </div>
                 </div>
             </div>
         </ng-template>
         <ng-template let-game pTemplate="gridItem">
-            <div class="col-4 px-3 py-3">
-                <div class="product-grid-item p-card">
-                    <div class="product-grid-item-top">
-                        <div>
+            <div class="col-3 px-2 py-2">
+                <div class="product-grid-item card">
+                    <div class="product-grid-item-top grid">
+                        <div class="col-6">
                             <p-chip label="KATEGORIA" icon="pi pi-tag d-block"></p-chip>
                         </div>
-                        <div>
-                            <p-chip label="PLATFORMY" icon="pi pi-tag d-block"></p-chip>
+                        <div class="col-6">
+                            <button pButton icon="pi pi-microsoft" type="button" class="d-block p-button-raised p-button-rounded match-platform-button"></button>
+                            <button pButton icon="pi pi-apple" type="button" class="d-block p-button-raised p-button-rounded match-platform-button"></button>
+                            <button pButton icon="pi pi-angle-double-right" type="button" class="d-block p-button-raised p-button-rounded match-platform-button"></button>
                         </div>
-                        <span>STATUS?</span>
                     </div>
-                    <div class="product-grid-item-content">
+                    <div class="match-grid-item-content">
                         <img src={{game.imageUrl}} class="game-cover-img" [alt]="game.title" />
-                        <div class="product-name">{{game.title}}</div>
-
+                        <div class="game-name">{{game.title}}</div>
+                        <div class="game-name">{{game.releaseDate | date: '(yyyy)'}}</div>
                     </div>
-                    <div class="product-grid-item-bottom">
-                        <span class="product-price">CENA</span>
-                        <p-button icon="pi pi-shopping-cart"></p-button>
+                    <div class="match-grid-item-bottom">
+                        <button pButton icon="pi pi-eye-slash" type="button" class="mx-5 p-button-raised p-button-rounded match-button-left"></button>
+                        <button pButton icon="pi pi-heart" type="button" class=" mx-5 p-button-raised p-button-rounded match-button-right"></button>                        
                     </div>
                 </div>
             </div>
