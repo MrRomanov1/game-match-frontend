@@ -29,26 +29,26 @@
             </div>
         </ng-template>
         <ng-template let-game pTemplate="gridItem">
-            <div class="col-3 px-2 py-2">
-                <div class="product-grid-item card">
-                    <div class="product-grid-item-top grid">
+            <div class="col-4 px-2 py-2 mb-3">
+                <div class="match-grid-item card shadow-5">
+                    <div class="match-grid-item-top grid">
                         <div class="col-6">
-                            <p-chip label="KATEGORIA" icon="pi pi-tag d-block"></p-chip>
+                            <p-chip label="{{game.gameCategories[0].name}}" class="mx-4 shadow-20 match-category-tag"></p-chip>
                         </div>
-                        <div class="col-6">
-                            <button pButton icon="pi pi-microsoft" type="button" class="d-block p-button-raised p-button-rounded match-platform-button"></button>
-                            <button pButton icon="pi pi-apple" type="button" class="d-block p-button-raised p-button-rounded match-platform-button"></button>
-                            <button pButton icon="pi pi-angle-double-right" type="button" class="d-block p-button-raised p-button-rounded match-platform-button"></button>
+                        <div class="col-6 mb-2 pr-4">
+                            <button pButton icon="pi pi-microsoft" type="button" class="mx-1 d-block p-button-raised p-button-rounded shadow-15 match-platform-button"></button>
+                            <button pButton icon="pi pi-apple" type="button" class="mx-1 d-block p-button-raised p-button-rounded shadow-15 match-platform-button"></button>
+                            <button pButton icon="pi pi-angle-double-right" type="button" class="mx-1 d-block p-button-raised shadow-15 p-button-rounded match-platform-button"></button>
                         </div>
                     </div>
                     <div class="match-grid-item-content">
-                        <img src={{game.imageUrl}} class="game-cover-img" [alt]="game.title" />
+                        <img src={{game.imageUrl}} class="game-cover-img mb-2" [alt]="game.title"/>
                         <div class="game-name">{{game.title}}</div>
                         <div class="game-name">{{game.releaseDate | date: '(yyyy)'}}</div>
                     </div>
-                    <div class="match-grid-item-bottom">
-                        <button pButton icon="pi pi-eye-slash" type="button" class="mx-5 p-button-raised p-button-rounded match-button-left"></button>
-                        <button pButton icon="pi pi-heart" type="button" class=" mx-5 p-button-raised p-button-rounded match-button-right"></button>                        
+                    <div class="match-grid-item-bottom mt-3">
+                        <button pButton icon="pi pi-eye-slash" type="button" class="mx-2 p-button-raised p-button-rounded p-button-danger" [disabled]="true"></button>
+                        <button pButton icon="pi pi-heart" type="button" class="mx-2 p-button-raised p-button-rounded match-button-favourites" [disabled]="true"></button>                        
                     </div>
                 </div>
             </div>

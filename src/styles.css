@@ -54,13 +54,13 @@ body {
 .p-chip {
     background: none !important;
     color: white;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
+    border: none;
+    box-shadow: 0px 1px 7px rgb(0 0 0 / 10%), 0px 4px 5px -2px rgb(0 0 0 / 12%), 0px 10px 15px -5px rgb(0 0 0 / 20%) !important;
 }
 
 .p-chip-text {
     font-size: 12px !important;
+    color: white !important;
 }
 
 .p-dataview {
@@ -79,20 +79,48 @@ body {
     background: none !important;
 }
 
-.match-button-left {
-    float: left !important;
-}
-
-.match-button-right {
-    float: right !important;
-}
-
 .match-platform-button {
     background: none !important;
-    height: 1.6rem !important;
-    width: 1.6rem !important; 
+    height: 1.9rem !important;
+    width: 1.9rem !important;
+    float: right !important;
+    border: none !important;
+    cursor: default !important;
 }
 
 .match-platform-button > span {
     font-size: 12px !important;    
 }
+
+.match-grid-item-bottom {
+    display: flex !important;
+    justify-content: center;
+}
+
+.match-grid-item-top {
+    display: flex !important;
+}
+
+.match-category-tag {
+    color: white;
+}
+
+.game-name {
+    color: white;
+}
+
+.match-grid-item {    
+    border-radius: 4%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.match-button-favourites {
+    background-color: rgba(10, 189, 139, 0.9) !important;
+    border: none !important;
+}
+
+.match-category-tag {
+    text-transform: uppercase;
+}
+
