@@ -8,24 +8,29 @@
                 <div class="col-12">
                     <p-tabView>
                         <p-tabPanel header="Platformy">
-                            <div *ngFor="let platform of platforms" class="platform-block text-center">
-                                <div class="platform-box mx-2 my-2" (click)="handlePlatformButtonClick(platform)" [ngClass]="platform.matchButtonClassField">
+                            <div *ngFor="let platform of platforms" class="platform-block text-center mt-2">
+                                <div class="platform-box mx-2 my-2" (click)="handlePlatformButtonClick(platform)"
+                                    [ngClass]="platform.matchButtonClassField">
                                     <img src={{platform.icon}} class="platform-icon">
                                     <p class="platform-text">{{platform.name}}</p>
                                 </div>
                             </div>
                         </p-tabPanel>
                         <p-tabPanel header="Kategorie">
-                            <button pButton type="button" label={{category.name}} value={{category.gameCategoryId}}
-                                class="button-match mx-1 my-1 p-button-raised p-button-rounded"
-                                *ngFor="let category of gameCategories" [ngClass]="category.matchButtonClassField"
-                                (click)="handleCategoryButtonClick(category)"></button>
+                            <div class="mt-2">
+                                <button pButton type="button" label={{category.name}} value={{category.gameCategoryId}}
+                                    class="button-match mx-1 my-1 p-button-raised p-button-rounded"
+                                    *ngFor="let category of gameCategories" [ngClass]="category.matchButtonClassField"
+                                    (click)="handleCategoryButtonClick(category)"></button>
+                            </div>
                         </p-tabPanel>
                         <p-tabPanel header="Tryby Gry">
-                            <button pButton type="button" label={{gameMode.name}} value={{gameMode.id}}
-                                class="button-match mx-1 my-1 p-button-raised p-button-rounded"
-                                *ngFor="let gameMode of gameModes" [ngClass]="gameMode.matchButtonClassField"
-                                (click)="handleModeButtonClick(gameMode)"></button>
+                            <div class="mt-2">
+                                <button pButton type="button" label={{gameMode.name}} value={{gameMode.id}}
+                                    class="button-match mx-1 my-1 p-button-raised p-button-rounded"
+                                    *ngFor="let gameMode of gameModes" [ngClass]="gameMode.matchButtonClassField"
+                                    (click)="handleModeButtonClick(gameMode)"></button>
+                            </div>
                         </p-tabPanel>
                         <p-tabPanel header="Data Wydania">
                             Coming Soon

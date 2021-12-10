@@ -67,8 +67,13 @@ body {
     background: none !important;
 }
 
+.p-dataview .p-paginator-bottom {
+    border-color: rgb(11, 32, 31);    
+}
+
 .p-dataview-header {
     background: none !important;
+    border: none !important;
 }
 
 .p-dataview-content {
@@ -124,3 +129,50 @@ body {
     text-transform: uppercase;
 }
 
+.p-paginator-bottom > button {
+    background: none !important;
+    color: white !important;
+}
+
+.p-paginator-bottom > button:hover {
+    background-color: rgb(18,38,39) !important;
+    color: white !important;
+}
+
+.p-paginator-bottom > button:focus {
+    box-shadow: none;
+}
+
+.p-paginator-bottom > .p-paginator-pages > button {
+    background: none !important;
+    color: white !important;
+}
+
+.p-paginator-bottom > .p-paginator-pages > button:hover {
+    background-color: rgb(20,40,40) !important;
+    color: white !important;
+}
+
+.p-paginator-bottom > .p-paginator-pages > button:focus {
+    box-shadow: none;
+}
+
+.p-paginator-bottom > .p-paginator-pages > button.p-highlight{
+    background-color: rgb(18,38,39) !important;
+    color: white !important;
+}
+
+.match-layout-options {
+    float: right !important;
+}
+
+.p-dataview-layout-options > button {
+    background: none !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0px 1px 7px rgb(0 0 0 / 10%), 0px 4px 5px -2px rgb(0 0 0 / 12%), 0px 10px 15px -5px rgb(0 0 0 / 20%) !important;
+}
+
+.p-dataview-layout-options > button.p-highlight {
+    background-color: rgb(18,38,39) !important;
+}
