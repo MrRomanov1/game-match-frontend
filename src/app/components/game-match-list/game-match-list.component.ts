@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { Game } from 'src/app/common/game/game';
+import { GameCategory } from 'src/app/common/game/game-category';
 
 @Component({
   selector: 'app-game-match-list',
@@ -11,6 +12,7 @@ import { Game } from 'src/app/common/game/game';
 export class GameMatchListComponent implements OnInit {
 
   @Input() matchedGames: Game[];
+  @Input() categoriesToMatch: GameCategory[];
 
   sortOrder: number;
   sortOptions: SelectItem[];

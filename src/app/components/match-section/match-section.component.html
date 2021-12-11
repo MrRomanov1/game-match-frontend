@@ -53,7 +53,8 @@
                 </div>
             </div>
             <div class="grid" *ngIf="matchedGames.length > 0">
-                <app-game-match-list class="col-12" [matchedGames]="matchedGames"></app-game-match-list>
+                <app-game-match-list class="col-12" [matchedGames]="matchedGames"
+                    [categoriesToMatch]="categoriesToMatch"></app-game-match-list>
                 <div class="col-1"></div>
                 <div class="col-11">
                 </div>
@@ -61,3 +62,9 @@
         </p-card>
     </div>
 </section>
+
+<!-- TODO 
+ - rating module working when user feature will be provided
+ - system icons -> use of font-awesome for icons unavailable in primeng
+ - knob coloring as match value rises
+ - other matching conditions -->

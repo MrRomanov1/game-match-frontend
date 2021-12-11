@@ -29,6 +29,8 @@ import { GameMatchListComponent } from './components/game-match-list/game-match-
 import {RatingModule} from 'primeng/rating';
 import {DialogModule} from 'primeng/dialog';
 import { ChipModule } from 'primeng/chip';
+import { FormsModule } from '@angular/forms';
+import {KnobModule} from 'primeng/knob';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { ChipModule } from 'primeng/chip';
     TabViewModule,
     RatingModule,
     DialogModule,
-    ChipModule
+    ChipModule,
+    FormsModule,
+    KnobModule
   ],
   providers: [GameService, 
     GameCategoryListService],
