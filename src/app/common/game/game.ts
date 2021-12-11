@@ -13,6 +13,7 @@ export class Game {
     systemMinimumRequirements: string;
     systemRecommendedRequirements: string;
     rating: number;
+    numberOfVotes: number;
     releaseDate: Date;
     gameCategories: GameCategory[];
     gameModes: GameMode[];

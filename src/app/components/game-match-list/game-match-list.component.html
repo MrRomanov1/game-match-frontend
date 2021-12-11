@@ -1,22 +1,22 @@
 <div class="card">
-    <p-dataView #dv [value]="matchedGames" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField"
-        [sortOrder]="sortOrder" layout="list">
+    <p-dataView #dv [value]="matchedGames" [paginator]="true" [rows]="9" filterBy="title" [sortField]="sortField"
+        [sortOrder]="sortOrder" layout="grid" class="dataView" [emptyMessage]='emptyMessage'>
         <ng-template pTemplate="header">
             <div class="match-header d-block">
-                <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price"
+                <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Najbardziej popularne"
                     (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0 match-header-sort d-block">
                 </p-dropdown>
                 <span class="p-input-icon-left p-mb-2 p-mb-md-0 ml-4 match-header-search d-block">
-                    <i class="pi pi-search"></i>
-                    <input type="search" pInputText placeholder="Wyszukaj tytuł">
+                    <i class="pi pi-search match-search-icon"></i>
+                    <input type="search" pInputText placeholder="Wyszukaj tytuł" (input)="dv.filter($any($event.target).value, 'contains')">
                 </span>
                 <p-dataViewLayoutOptions class="match-layout-options"></p-dataViewLayoutOptions>
             </div>
         </ng-template>
         <ng-template let-game pTemplate="listItem">
-            <div class="col-12">
+            <div class="col-6">
                 <div class="match-list-item mt-2">
-                    <img src={{game.imageUrl}} class="game-cover-img-list mb-2" [alt]="game.title" />
+                    <img src={{game.imageUrl}} class="game-cover-img-list mb-2" [alt]="game.title" (click)="handleGameClick(game)"/>
                     <div class="game-list-detail">
                         <div class="game-name-list mb-1">{{game.title}}</div>
                         <div class="game-name-list mb-3">{{game.releaseDate | date: '(yyyy)'}}</div>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="match-grid-item-content">
-                        <img src={{game.imageUrl}} class="game-cover-img mb-2" [alt]="game.title" />
+                        <img src={{game.imageUrl}} class="game-cover-img mb-2" [alt]="game.title" (click)="handleGameClick(game)"/>
                         <p-rating [(ngModel)]="game.rating" [readonly]="true" [cancel]="false"></p-rating>
                         <div class="game-name">{{game.title}}</div>
                         <div class="game-name">{{game.releaseDate | date: '(yyyy)'}}</div>

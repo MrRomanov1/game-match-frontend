@@ -9,7 +9,7 @@
                     <p-tabView>
                         <p-tabPanel header="Platformy">
                             <div *ngFor="let platform of platforms" class="platform-block text-center mt-2">
-                                <div class="platform-box mx-2 my-2" (click)="handlePlatformButtonClick(platform)"
+                                <div class="platform-box mx-2 my-2 shadow-20" (click)="handlePlatformButtonClick(platform)"
                                     [ngClass]="platform.matchButtonClassField">
                                     <img src={{platform.icon}} class="platform-icon">
                                     <p class="platform-text">{{platform.name}}</p>
@@ -45,9 +45,9 @@
                             Coming Soon
                         </p-tabPanel>
                     </p-tabView>
-                    <div *ngIf="sectionButtons.length > 0">
+                    <div *ngIf="sectionButtons.length > 0" class="match-section-button-group">
                         <button pButton type="button" icon="pi pi-times" iconPos="right" label={{button.recordName}}
-                            value={{button.recordId}} class="mx-1 my-1 p-button-raised p-button-rounded"
+                            value={{button.recordId}} class="mx-1 mt-3 p-button-raised p-button-rounded match-section-button shadow-10"
                             *ngFor="let button of sectionButtons" (click)="handleSectionButtonClick(button)"></button>
                     </div>
                 </div>

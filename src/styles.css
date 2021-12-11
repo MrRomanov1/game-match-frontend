@@ -32,10 +32,31 @@ body {
 
 .p-tabview-nav {
     background: none !important;
+    border-color: rgb(11, 32, 31) !important;
+}
+
+.p-tabview-nav-content > .p-tabview-nav > .p-highlight {
+    background-color: rgb(11, 32, 31) !important;
 }
 
 .p-tabview-nav-link {
     background: none !important;
+    border-color: rgb(11, 32, 31) !important;
+}
+
+.p-tabview-nav-link:hover {
+    background-color: rgb(11, 32, 31) !important;
+}
+
+.p-tabview-nav-link:focus {
+    box-shadow: none !important;
+}
+
+
+.p-tabview-title {
+    text-transform: uppercase !important;
+    font-weight: 400 !important;
+    color: white !important;
 }
 
 .button-match{
@@ -230,3 +251,52 @@ body {
 .p-dataview.p-dataview-list .p-dataview-content > .p-grid > div {    
     border-color: rgb(11, 32, 31) !important;
 }
+
+.p-dataview-emptymessage {
+    color: white !important;
+}
+
+.match-header-search > input{
+    background-color:rgba(34, 37, 42, 0.2);
+    color: white !important;
+}
+
+.match-header-search > input:hover{
+    border-color: seagreen !important;
+}
+
+.match-header-search > input:focus{
+    box-shadow: none !important;
+    border-color: seagreen !important;
+}
+
+.match-header-search > input::placeholder{
+    color: white !important;
+}
+
+.match-search-icon {
+    color: white !important;
+}
+
+.match-header-sort {
+    background: none !important;
+    color: white !important;
+}
+
+.match-header-sort > span {
+    color: white !important;
+}
+
+.match-header-sort > .p-dropdown-trigger  {
+    color: white !important;
+}
+
+.match-header-sort:hover {
+    border-color: seagreen !important
+}
+
+.match-header-sort.p-focus {
+    box-shadow: none !important;
+    border-color: seagreen !important
+}
+

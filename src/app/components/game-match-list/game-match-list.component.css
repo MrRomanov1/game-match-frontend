@@ -1,8 +1,12 @@
 .game-cover-img {
-  max-width: 200px;
+  width: 200px;
   height: 300px;
   display: inline-block;
 }  
+
+.game-cover-img:hover {
+  cursor: pointer;
+}
 
 .match-grid-item-content{
   display: flex;
@@ -12,8 +16,12 @@
 }
 
 .game-cover-img-list {
-  max-width: 150px;
+  width: 150px;
   height: 200px;
   display: inline-block;
   margin-right: 2rem;
+}
+
+.game-cover-img-list:hover {
+  cursor: pointer;
 }
