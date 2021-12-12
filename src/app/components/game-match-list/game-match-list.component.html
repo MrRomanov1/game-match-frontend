@@ -8,7 +8,8 @@
                 </p-dropdown>
                 <span class="p-input-icon-left p-mb-2 p-mb-md-0 ml-4 match-header-search d-block">
                     <i class="pi pi-search match-search-icon"></i>
-                    <input type="search" pInputText placeholder="Wyszukaj tytuł" (input)="dv.filter($any($event.target).value, 'contains')">
+                    <input type="search" pInputText placeholder="Wyszukaj tytuł"
+                        (input)="dv.filter($any($event.target).value, 'contains')">
                 </span>
                 <p-dataViewLayoutOptions class="match-layout-options"></p-dataViewLayoutOptions>
             </div>
@@ -16,7 +17,8 @@
         <ng-template let-game pTemplate="listItem">
             <div class="col-6">
                 <div class="match-list-item mt-2">
-                    <img src={{game.imageUrl}} class="game-cover-img-list mb-2" [alt]="game.title" (click)="handleGameClick(game)"/>
+                    <img src={{game.imageUrl}} class="game-cover-img-list mb-2" [alt]="game.title"
+                        (click)="handleGameClick(game)" />
                     <div class="game-list-detail">
                         <div class="game-name-list mb-1">{{game.title}}</div>
                         <div class="game-name-list mb-3">{{game.releaseDate | date: '(yyyy)'}}</div>
@@ -26,12 +28,9 @@
                             </p-chip>
                         </div>
                         <div class="mt-3">
-                            <button pButton icon="pi pi-microsoft" type="button"
+                            <button pButton *ngFor="let gamePlatform of game.platformIcons" icon="{{gamePlatform}}"
+                                type="button"
                                 class="mx-1 d-block p-button-raised p-button-rounded shadow-15 match-platform-button-list"></button>
-                            <button pButton icon="pi pi-apple" type="button"
-                                class="mx-1 d-block p-button-raised p-button-rounded shadow-15 match-platform-button-list"></button>
-                            <button pButton icon="pi pi-angle-double-right" type="button"
-                                class="mx-1 d-block p-button-raised shadow-15 p-button-rounded match-platform-button-list"></button>
                         </div>
                     </div>
                     <div class="match-list-action flex flex-column">
@@ -43,7 +42,8 @@
                             <button pButton icon="pi pi-eye-slash" type="button"
                                 class="p-button-raised p-button-rounded p-button-danger" [disabled]="true"></button>
                             <button pButton icon="pi pi-bookmark" type="button"
-                                class="p-button-raised p-button-rounded match-button-favourites" [disabled]="true"></button>
+                                class="p-button-raised p-button-rounded match-button-favourites"
+                                [disabled]="true"></button>
                         </div>
                     </div>
                 </div>
@@ -58,16 +58,14 @@
                             </p-chip>
                         </div>
                         <div class="col-6 mb-2 pr-4">
-                            <button pButton icon="pi pi-microsoft" type="button"
+                            <button pButton *ngFor="let gamePlatform of game.platformIcons" icon="{{gamePlatform}}"
+                                type="button"
                                 class="mx-1 d-block p-button-raised p-button-rounded shadow-15 match-platform-button"></button>
-                            <button pButton icon="pi pi-apple" type="button"
-                                class="mx-1 d-block p-button-raised p-button-rounded shadow-15 match-platform-button"></button>
-                            <button pButton icon="pi pi-angle-double-right" type="button"
-                                class="mx-1 d-block p-button-raised shadow-15 p-button-rounded match-platform-button"></button>
                         </div>
                     </div>
                     <div class="match-grid-item-content">
-                        <img src={{game.imageUrl}} class="game-cover-img mb-2" [alt]="game.title" (click)="handleGameClick(game)"/>
+                        <img src={{game.imageUrl}} class="game-cover-img mb-2" [alt]="game.title"
+                            (click)="handleGameClick(game)" />
                         <p-rating [(ngModel)]="game.rating" [readonly]="true" [cancel]="false"></p-rating>
                         <div class="game-name">{{game.title}}</div>
                         <div class="game-name">{{game.releaseDate | date: '(yyyy)'}}</div>
@@ -90,3 +88,4 @@
             </div>
         </ng-template>
     </p-dataView>
+</div>
