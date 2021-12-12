@@ -4,6 +4,10 @@ import { GameCategory } from 'src/app/common/game/game-category';
 import { Game } from 'src/app/common/game/game';
 import { GameService } from 'src/app/services/game.service';
 import { Carousel } from 'primeng/carousel';
+import { Platform } from 'src/app/common/game/platform';
+import { GameMode } from 'src/app/common/game/game-mode';
+import { GameModeService } from 'src/app/services/game-mode.service';
+import { PlatformService } from 'src/app/services/platform.service';
 
 @Component({
   selector: 'app-match-section',
@@ -23,22 +27,32 @@ export class MatchSectionComponent implements OnInit {
 
   /** initial values */
   gameCategories: GameCategory[] = [];
+  platforms: Platform[] = [];
+  gameModes: GameMode[] = [];
 
   /** endpoint values */
   categoriesToMatch: GameCategory[] = [];
+  platformsToMatch: Platform[] = [];
+  gameModesToMatch: GameMode[] = [];
+  gameParams: GameWrapper;
 
   /** output values */
   matchedGames: Game[] = [];
 
   constructor(
     private gameCategoryListService: GameCategoryListService,
-    private gameService: GameService) { }
+    private gameService: GameService,
+    private gameModeService: GameModeService,
+    private platformService: PlatformService) { }
 
   ngOnInit(): void {
-    this.listGameCategories();
+    this.getGameCategories();
+    this.getPlatforms();
+    this.getGameModes();
   }
 
-  listGameCategories() {
+  /** initial callouts */
+  getGameCategories() {
     this.gameCategoryListService.getGameCategoryList().subscribe(
       data => {
         this.gameCategories = data;
@@ -46,23 +60,45 @@ export class MatchSectionComponent implements OnInit {
     )
   }
 
-  async getGamesByUserMatch() {
-    this.gameService.getGameMatch(this.categoriesToMatch).then(
-      async data => {
-        this.matchedGames = await data;
+  getPlatforms() {
+    this.platformService.getPlatformList().subscribe(
+      data => {
+        this.platforms = data;
+      }
+    )
+  }
+
+  getGameModes() {
+    this.gameModeService.getGameModesList().subscribe(
+      data => {
+        this.gameModes = data;
       }
     )
   }
 
   /**gameMatch handlers */
   handleUserMatch() {
+    let gameWrapper = new GameWrapper (this.categoriesToMatch,this.gameModesToMatch, this.platformsToMatch);
+    this.gameParams = gameWrapper;
     if (this.sectionButtons.length > 0 && this.runAgainFlag == true) {
       try {
         this.getGamesByUserMatch();
       } finally {
         this.runAgainFlag = false;
       }
+    } else if (this.sectionButtons.length == 0 && this.runAgainFlag == true) {
+      this.matchedGames = [];
     }
+  }
+  
+  async getGamesByUserMatch() {
+    this.gameService
+    .getGameMatch(this.gameParams)
+    .then(
+      async data => {
+        this.matchedGames = await data;
+      }
+    )
   }
 
   /**item selection handlers */
@@ -70,6 +106,7 @@ export class MatchSectionComponent implements OnInit {
     this.sectionButtons.push(item);
     this.categoriesToMatch.push(category);
     this.runAgainFlag = true;
+    this.handleUserMatch();
   }
 
   handleDeselectCategory(item: ButtonWrapper, category: GameCategory) {
@@ -84,10 +121,54 @@ export class MatchSectionComponent implements OnInit {
       }
     });
     this.runAgainFlag = true;
+    this.handleUserMatch();
+  }
+
+  handleSelectMode(item: ButtonWrapper, gameMode: GameMode) {
+    this.sectionButtons.push(item);
+    this.gameModesToMatch.push(gameMode);
+    this.runAgainFlag = true;
+    this.handleUserMatch();
+  }
+
+  handleDeselectMode(item: ButtonWrapper, gameMode: GameMode) {
+    this.gameModesToMatch.forEach((value, index) => {
+      if (value.id == gameMode.id) {
+        this.gameModesToMatch.splice(index, 1);
+      }
+    });
+    this.sectionButtons.forEach((value, index) => {
+      if ((value.recordName + value.recordId) == (item.recordName + item.recordId)) {
+        this.sectionButtons.splice(index, 1);
+      }
+    });
+    this.runAgainFlag = true;
+    this.handleUserMatch();
+  }
+
+  handleSelectPlatform(item: ButtonWrapper, platform: Platform) {
+    this.sectionButtons.push(item);
+    this.platformsToMatch.push(platform);
+    this.runAgainFlag = true;
+    this.handleUserMatch();
+  }
+
+  handleDeselectPlatform(item: ButtonWrapper, platform: Platform) {
+    this.platformsToMatch.forEach((value, index) => {
+      if (value.id == platform.id) {
+        this.platformsToMatch.splice(index, 1);
+      }
+    });
+    this.sectionButtons.forEach((value, index) => {
+      if ((value.recordName + value.recordId) == (item.recordName + item.recordId)) {
+        this.sectionButtons.splice(index, 1);
+      }
+    });
+    this.runAgainFlag = true;
+    this.handleUserMatch();
   }
 
   handleCategoryButtonClick(category: GameCategory) {
-    //this.gameCategories.push(category);
     if (category.matchButtonClassField == "button-match-active") {
       category.matchButtonClassField = "";
       let sectionButton = new ButtonWrapper("GameCategory", category.name, category.gameCategoryId);
@@ -97,7 +178,35 @@ export class MatchSectionComponent implements OnInit {
       let sectionButton = new ButtonWrapper("GameCategory", category.name, category.gameCategoryId);
       this.handleSelectCategory(sectionButton, category);
     }
+    this.handleUserMatch();
   }
+
+  handleModeButtonClick(gameMode: GameMode) {
+    if (gameMode.matchButtonClassField == "button-match-active") {
+      gameMode.matchButtonClassField = "";
+      let sectionButton = new ButtonWrapper("GameMode", gameMode.name, gameMode.id);
+      this.handleDeselectMode(sectionButton, gameMode);
+    } else {
+      gameMode.matchButtonClassField = "button-match-active";
+      let sectionButton = new ButtonWrapper("GameMode", gameMode.name, gameMode.id);
+      this.handleSelectMode(sectionButton, gameMode);
+    }
+    this.handleUserMatch();
+  }
+
+  handlePlatformButtonClick(platform: Platform) {
+    if (platform.matchButtonClassField == "button-match-active") {
+      platform.matchButtonClassField = "";
+      let sectionButton = new ButtonWrapper("Platform", platform.name, platform.id);
+      this.handleDeselectPlatform(sectionButton, platform);
+    } else {
+      platform.matchButtonClassField = "button-match-active";
+      let sectionButton = new ButtonWrapper("Platform", platform.name, platform.id);
+      this.handleSelectPlatform(sectionButton, platform);
+    }
+    this.handleUserMatch();
+  }
+
 
   handleSectionButtonClick(sectionButton: ButtonWrapper) {
     this.sectionButtons.forEach((value, index) => {
@@ -106,13 +215,29 @@ export class MatchSectionComponent implements OnInit {
       }
     });
     if (sectionButton.objectType == "GameCategory") {
-      this.gameCategories.forEach((value, index) => {
+      this.categoriesToMatch.forEach((value, index) => {
         if ((value.name + value.gameCategoryId) == (sectionButton.recordName + sectionButton.recordId)) {
-          this.gameCategories[index].matchButtonClassField = "";
+          this.categoriesToMatch[index].matchButtonClassField = "";
+          this.categoriesToMatch.splice(index, 1);
+        }
+      });
+    } else if (sectionButton.objectType == "GameMode") {
+      this.gameModesToMatch.forEach((value, index) => {
+        if ((value.name + value.id) == (sectionButton.recordName + sectionButton.recordId)) {
+          this.gameModesToMatch[index].matchButtonClassField = "";
+          this.gameModesToMatch.splice(index, 1);
+        }
+      });
+    } else if (sectionButton.objectType == "Platform") {
+      this.platformsToMatch.forEach((value, index) => {
+        if ((value.name + value.id) == (sectionButton.recordName + sectionButton.recordId)) {
+          this.platformsToMatch[index].matchButtonClassField = "";
+          this.platformsToMatch.splice(index, 1);
         }
       });
     }
     this.runAgainFlag = true;
+    this.handleUserMatch();
   }
 }
 
@@ -125,5 +250,20 @@ export class ButtonWrapper {
     this.objectType = objectType;
     this.recordName = recordName;
     this.recordId = recordId;
+  }  
+}
+
+export class GameWrapper {
+  gameCategories: GameCategory[];
+  gameModes: GameMode[];
+  platforms: Platform[];
+
+  constructor(gameCategories: GameCategory[],
+      gameModes: GameMode[],
+      platforms: Platform[]
+  ) {
+      this.gameCategories = gameCategories;
+      this.gameModes = gameModes;
+      this.platforms = platforms;
   }
 }

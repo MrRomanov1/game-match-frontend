@@ -1,5 +1,5 @@
 <section>
-    <div class="grid mt-5">        
+    <div class="grid mt-5">
         <p-card class="card col-8 col-offset-2">
             <ng-template pTemplate="header">
                 <h2 class="mx-3 pt-3">Dopasuj grę do się</h2>
@@ -8,16 +8,29 @@
                 <div class="col-12">
                     <p-tabView>
                         <p-tabPanel header="Platformy">
-                            Coming Soon
+                            <div *ngFor="let platform of platforms" class="platform-block text-center mt-2">
+                                <div class="platform-box mx-2 my-2 shadow-20" (click)="handlePlatformButtonClick(platform)"
+                                    [ngClass]="platform.matchButtonClassField">
+                                    <img src={{platform.icon}} class="platform-icon">
+                                    <p class="platform-text">{{platform.name}}</p>
+                                </div>
+                            </div>
                         </p-tabPanel>
                         <p-tabPanel header="Kategorie">
-                            <button pButton type="button" label={{category.name}} value={{category.gameCategoryId}}
-                                class="button-match mx-1 my-1 p-button-raised p-button-rounded"
-                                *ngFor="let category of gameCategories" [ngClass]="category.matchButtonClassField"
-                                (click)="handleCategoryButtonClick(category)"></button>
+                            <div class="mt-2">
+                                <button pButton type="button" label={{category.name}} value={{category.gameCategoryId}}
+                                    class="button-match mx-1 my-1 p-button-raised p-button-rounded"
+                                    *ngFor="let category of gameCategories" [ngClass]="category.matchButtonClassField"
+                                    (click)="handleCategoryButtonClick(category)"></button>
+                            </div>
                         </p-tabPanel>
                         <p-tabPanel header="Tryby Gry">
-                            Coming Soon
+                            <div class="mt-2">
+                                <button pButton type="button" label={{gameMode.name}} value={{gameMode.id}}
+                                    class="button-match mx-1 my-1 p-button-raised p-button-rounded"
+                                    *ngFor="let gameMode of gameModes" [ngClass]="gameMode.matchButtonClassField"
+                                    (click)="handleModeButtonClick(gameMode)"></button>
+                            </div>
                         </p-tabPanel>
                         <p-tabPanel header="Data Wydania">
                             Coming Soon
@@ -32,15 +45,16 @@
                             Coming Soon
                         </p-tabPanel>
                     </p-tabView>
-                    <div *ngIf="sectionButtons.length > 0">
-                        <button pButton type="button" icon="pi pi-times" iconPos="right" label={{button.recordName}} value={{button.recordId}}
-                            class="mx-1 my-1 p-button-raised p-button-rounded" *ngFor="let button of sectionButtons"
-                            (click)="handleSectionButtonClick(button)"></button>
+                    <div *ngIf="sectionButtons.length > 0" class="match-section-button-group">
+                        <button pButton type="button" icon="pi pi-times" iconPos="right" label={{button.recordName}}
+                            value={{button.recordId}} class="mx-1 mt-3 p-button-raised p-button-rounded match-section-button shadow-10"
+                            *ngFor="let button of sectionButtons" (click)="handleSectionButtonClick(button)"></button>
                     </div>
-                </div>           
+                </div>
             </div>
             <div class="grid" *ngIf="matchedGames.length > 0">
-                <app-game-match-list [matchedGames]="matchedGames"></app-game-match-list>
+                <app-game-match-list class="col-12" [matchedGames]="matchedGames"
+                    [categoriesToMatch]="categoriesToMatch"></app-game-match-list>
                 <div class="col-1"></div>
                 <div class="col-11">
                 </div>
@@ -48,3 +62,9 @@
         </p-card>
     </div>
 </section>
+
+<!-- TODO 
+ - rating module working when user feature will be provided
+ - system icons -> use of font-awesome for icons unavailable in primeng
+ - knob coloring as match value rises
+ - other matching conditions -->

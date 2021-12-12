@@ -1,40 +1,46 @@
-.btn-group {
-    white-space: nowrap;
-  }
-  
-  .btn.btn-primary,
-  .btn.btn-success {
-    float: none;
-  }
+.platform-block{
+  display: inline-block;
+  color: white;
+  text-align: center;
+}
 
-  .game-cat-btn {
-    background-color: #6610f2;
-    color: white;
-    border-color: #7721f3;
-    border-width: thick;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.15s;
-  }
+.platform-box {
+  width: 80px;
+  height: 90px;
+  border-style: solid;
+  border-width: 1px; 
+  border-color: black;
+  border-radius: 10%;
+  background-color: rgba(10, 189, 139, 0.9);
+}
 
-  .game-cat-btn.active {
-    background-color: #8832f5;
-    color: white;
-    border-color: #7721f3;
-    border-width: thick;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.15s;
-  }
+.platform-box:hover {
+  background-color: rgba(30, 240, 180, 0.9);
+  cursor: pointer;
+}
 
-  .game-cat-btn:hover {
-    background-color: #8832f5;
-    color: white;
-    border-color: black;
-    border-width: thick;
-  }
+.platform-text{
+  margin-top: 5px;
+  text-transform: uppercase;
+  font-size: 13px;
+}
 
-  .game-cover-img {
-    width: auto;
-    max-height: 250px;
-  }
+.platform-icon {
+  position: relative;
+  margin-top: 10px;
+  width: 50px;
+  height: 50px;
+}
+
+.match-section-button-group {
+  border-top: solid 1px rgb(11, 32, 31);
+}
+
+.match-section-button {
+  background-color: rgba(15, 120, 100, 0.9);
+  border: none;
+}
+
+.match-section-button:hover {
+  background-color: rgba(10, 189, 139, 0.9);
+}

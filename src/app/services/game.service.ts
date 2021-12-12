@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GameCategory } from '../common/game/game-category';
 import { map } from 'rxjs/operators';
+import { GameWrapper } from '../components/match-section/match-section.component';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +24,10 @@ export class GameService {
     return this.httpClient.get(this.baseUrl);
   }
 
-  async getGameMatch(gameCategories: GameCategory[]): Promise<any> {
-    return await this.httpClient.post<GameCategory[]>(this.gameMatchUrl, gameCategories).pipe(
-      map((data: GameCategory[]) => data
+  async getGameMatch(gameParameters: GameWrapper): Promise<any> {
+    
+    return await this.httpClient.post<GameWrapper>(this.gameMatchUrl, gameParameters).pipe(
+      map((data: GameWrapper) => data
       )).toPromise();
   }
 }
