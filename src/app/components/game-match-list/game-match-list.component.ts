@@ -50,6 +50,6 @@ export class GameMatchListComponent implements OnInit {
 
   handleGameClick(game: Game) {
     let url = Constants.SITE_URL + 'game/' + game.id;
-    window.open(url);
+    window.open(url, "_self");
   }
 }

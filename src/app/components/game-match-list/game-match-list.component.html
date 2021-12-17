@@ -16,7 +16,7 @@
         </ng-template>
         <ng-template let-game pTemplate="listItem">
             <div class="col-6">
-                <div class="match-list-item mt-2">
+                <div class="match-list-item mt-2 mx-2">
                     <img src={{game.imageUrl}} class="game-cover-img-list mb-2" [alt]="game.title"
                         (click)="handleGameClick(game)" />
                     <div class="game-list-detail">
@@ -67,7 +67,7 @@
                         <img src={{game.imageUrl}} class="game-cover-img mb-2" [alt]="game.title"
                             (click)="handleGameClick(game)" />
                         <p-rating [(ngModel)]="game.rating" [readonly]="true" [cancel]="false"></p-rating>
-                        <div class="game-name">{{game.title}}</div>
+                        <div class="game-name game-name-pointer" (click)="handleGameClick(game)">{{game.title}}</div>
                         <div class="game-name">{{game.releaseDate | date: '(yyyy)'}}</div>
                     </div>
                     <div class="match-grid-item-bottom mt-3">

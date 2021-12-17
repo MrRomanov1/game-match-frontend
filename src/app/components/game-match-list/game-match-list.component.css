@@ -25,3 +25,7 @@
 .game-cover-img-list:hover {
   cursor: pointer;
 }
+
+.game-name-pointer {
+  cursor: pointer;
+}
