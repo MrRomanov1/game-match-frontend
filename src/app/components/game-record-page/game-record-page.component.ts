@@ -63,4 +63,16 @@ export class GameRecordPageComponent implements OnInit {
     return gameCategoryUrlById;
   }
 
+  getGameModeUrl(id: any) {
+    let gameModeUrlById;
+    gameModeUrlById = gameCategoryUrl + id;
+    return gameModeUrlById;
+  }
+
+  getPlatformUrl(id: any) {
+    let platformUrlById;
+    platformUrlById = gameCategoryUrl + id;
+    return platformUrlById;
+  }
+
 }

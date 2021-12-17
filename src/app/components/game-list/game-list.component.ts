@@ -40,7 +40,6 @@ export class GameListComponent implements OnInit {
     this.gameService.getGameList(this.categoryName).subscribe(
       data => {
         this.games = data;
-        console.log(data);
       }
     )
   }

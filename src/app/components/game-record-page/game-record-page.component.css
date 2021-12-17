@@ -31,3 +31,29 @@
   display: block;
   content: "";
 }
+
+.record-page-description {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.custom-link {
+  text-decoration: none;
+  color: white;
+}
+
+.custom-link-block {
+  letter-spacing: 1.5px;
+  border-bottom: white dotted 1px;
+  padding-bottom: 3px;
+  color: white;
+}
+
+.custom-link-block:hover { 
+  border-bottom: grey solid 1px;
+  padding-bottom: 3px;
+}
+
+.d-inline-block {
+  display: inline-block;
+}

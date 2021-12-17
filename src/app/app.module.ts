@@ -1,7 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { LOCALE_ID, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { registerLocaleData } from '@angular/common';
+import localePl from '@angular/common/locales/pl';
+registerLocaleData(localePl);
 
 import { AppComponent } from './app.component';
 import { GameListComponent } from './components/game-list/game-list.component';
@@ -31,6 +34,7 @@ import {DialogModule} from 'primeng/dialog';
 import { ChipModule } from 'primeng/chip';
 import { FormsModule } from '@angular/forms';
 import {KnobModule} from 'primeng/knob';
+import { SimilarGamesComponent } from './components/similar-games/similar-games.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,8 @@ import {KnobModule} from 'primeng/knob';
     HeaderAdBannerComponent,
     SafePipe,
     HomePageComponent,
-    GameMatchListComponent
+    GameMatchListComponent,
+    SimilarGamesComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +72,8 @@ import {KnobModule} from 'primeng/knob';
     KnobModule
   ],
   providers: [GameService, 
-    GameCategoryListService],
+    GameCategoryListService,
+    [{provide: LOCALE_ID, useValue: 'pl'}]],
   bootstrap: [AppComponent
   ],
   schemas:[NO_ERRORS_SCHEMA],

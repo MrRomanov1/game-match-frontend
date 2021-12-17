@@ -1,0 +1,4 @@
+<div class="similar-game" *ngFor="let tempGame of games | slice:0:4;" (click)="handleGameClick(tempGame)">
+        <img src={{tempGame.imageUrl}} class="game-cover-img" alt={{tempGame.title}}>
+        <h3>{{tempGame.title}}</h3>
+</div>
