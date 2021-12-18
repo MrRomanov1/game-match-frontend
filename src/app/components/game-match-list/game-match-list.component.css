@@ -29,3 +29,7 @@
 .game-name-pointer {
   cursor: pointer;
 }
+
+.link-no-decoration {
+  text-decoration: none;
+}

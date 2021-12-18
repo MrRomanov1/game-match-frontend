@@ -45,8 +45,8 @@ export class SimilarGamesComponent implements OnInit {
     });
   }
 
-  handleGameClick(game: Game) {
-    let url = Constants.SITE_URL + 'game/' + game.id;
-    window.open(url, "_self");
+  getGameUrl(game: Game) {
+    let gameUrl = Constants.SITE_URL + 'game/' + game.id;
+    return gameUrl;
   }
 }
