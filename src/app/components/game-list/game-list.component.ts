@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService } from 'src/app/services/game.service';
-import { Game } from 'src/app/common/game/game';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { PrimeNGConfig, SelectItem } from 'primeng/api';
 import { Constants } from 'src/app/constants';
 
-const gameUrl = '/game/';
+import { Game } from 'src/app/common/game/game';
+
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-game-list',
@@ -24,15 +23,15 @@ export class GameListComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.keys.length != 0) {
-        if (params.get('listParam') == 'coming-soon') {   
+        if (params.get('listParam') == Constants.COMING_SOON_DATA_VIEW_TYPE) {   
           this.componentType = Constants.COMING_SOON_DATA_VIEW_TYPE;       
           this.getNotYetReleasedGames();          
-        } else if (params.get('listParam') == 'popular') {
-          this.componentType = Constants.GENERIC_DATA_VIEW_TYPE;
+        } else if (params.get('listParam') == Constants.POPULAR_DATA_VIEW_TYPE) {
+          this.componentType = Constants.POPULAR_DATA_VIEW_TYPE;
           this.getPopularGames();
 
-        } else if (params.get('listParam') == 'highest-rating') {
-          this.componentType = Constants.GENERIC_DATA_VIEW_TYPE;
+        } else if (params.get('listParam') == Constants.HIGHEST_RATING_DATA_VIEW_TYPE) {
+          this.componentType = Constants.HIGHEST_RATING_DATA_VIEW_TYPE;
           this.getHighRatedGames();
 
         } else {

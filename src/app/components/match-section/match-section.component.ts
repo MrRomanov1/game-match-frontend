@@ -1,11 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { GameCategoryListService } from 'src/app/services/game-category-list.service';
-import { GameCategory } from 'src/app/common/game/game-category';
+import { Component, OnInit } from '@angular/core';
+import { Constants } from 'src/app/constants';
+
 import { Game } from 'src/app/common/game/game';
-import { GameService } from 'src/app/services/game.service';
-import { Carousel } from 'primeng/carousel';
-import { Platform } from 'src/app/common/game/platform';
+import { GameCategory } from 'src/app/common/game/game-category';
 import { GameMode } from 'src/app/common/game/game-mode';
+import { Platform } from 'src/app/common/game/platform';
+
+import { GameService } from 'src/app/services/game.service';
+import { GameCategoryListService } from 'src/app/services/game-category-list.service';
 import { GameModeService } from 'src/app/services/game-mode.service';
 import { PlatformService } from 'src/app/services/platform.service';
 
@@ -15,8 +17,6 @@ import { PlatformService } from 'src/app/services/platform.service';
   styleUrls: ['./match-section.component.css']
 })
 export class MatchSectionComponent implements OnInit {
-
-  @ViewChild('primeCarousel') primeCarousel: Carousel;
 
   /** selected items */
   selectedItems: GameCategory[] = [];
@@ -169,39 +169,39 @@ export class MatchSectionComponent implements OnInit {
   }
 
   handleCategoryButtonClick(category: GameCategory) {
-    if (category.matchButtonClassField == "button-match-active") {
+    if (category.matchButtonClassField == Constants.BUTTON_MATCH_ACTIVE_CLASS) {
       category.matchButtonClassField = "";
-      let sectionButton = new ButtonWrapper("GameCategory", category.name, category.gameCategoryId);
+      let sectionButton = new ButtonWrapper(Constants.GAME_CATEGORY_ENTITY, category.name, category.gameCategoryId);
       this.handleDeselectCategory(sectionButton, category);
     } else {
-      category.matchButtonClassField = "button-match-active";
-      let sectionButton = new ButtonWrapper("GameCategory", category.name, category.gameCategoryId);
+      category.matchButtonClassField = Constants.BUTTON_MATCH_ACTIVE_CLASS;
+      let sectionButton = new ButtonWrapper(Constants.GAME_CATEGORY_ENTITY, category.name, category.gameCategoryId);
       this.handleSelectCategory(sectionButton, category);
     }
     this.handleUserMatch();
   }
 
   handleModeButtonClick(gameMode: GameMode) {
-    if (gameMode.matchButtonClassField == "button-match-active") {
+    if (gameMode.matchButtonClassField == Constants.BUTTON_MATCH_ACTIVE_CLASS) {
       gameMode.matchButtonClassField = "";
-      let sectionButton = new ButtonWrapper("GameMode", gameMode.name, gameMode.id);
+      let sectionButton = new ButtonWrapper(Constants.GAME_MODE_ENTITY, gameMode.name, gameMode.id);
       this.handleDeselectMode(sectionButton, gameMode);
     } else {
-      gameMode.matchButtonClassField = "button-match-active";
-      let sectionButton = new ButtonWrapper("GameMode", gameMode.name, gameMode.id);
+      gameMode.matchButtonClassField = Constants.BUTTON_MATCH_ACTIVE_CLASS;
+      let sectionButton = new ButtonWrapper(Constants.GAME_MODE_ENTITY, gameMode.name, gameMode.id);
       this.handleSelectMode(sectionButton, gameMode);
     }
     this.handleUserMatch();
   }
 
   handlePlatformButtonClick(platform: Platform) {
-    if (platform.matchButtonClassField == "button-match-active") {
+    if (platform.matchButtonClassField == Constants.BUTTON_MATCH_ACTIVE_CLASS) {
       platform.matchButtonClassField = "";
-      let sectionButton = new ButtonWrapper("Platform", platform.name, platform.id);
+      let sectionButton = new ButtonWrapper(Constants.PLATFORM_ENTITY, platform.name, platform.id);
       this.handleDeselectPlatform(sectionButton, platform);
     } else {
-      platform.matchButtonClassField = "button-match-active";
-      let sectionButton = new ButtonWrapper("Platform", platform.name, platform.id);
+      platform.matchButtonClassField = Constants.BUTTON_MATCH_ACTIVE_CLASS;
+      let sectionButton = new ButtonWrapper(Constants.PLATFORM_ENTITY, platform.name, platform.id);
       this.handleSelectPlatform(sectionButton, platform);
     }
     this.handleUserMatch();
@@ -214,21 +214,21 @@ export class MatchSectionComponent implements OnInit {
         this.sectionButtons.splice(index, 1);
       }
     });
-    if (sectionButton.objectType == "GameCategory") {
+    if (sectionButton.objectType == Constants.GAME_CATEGORY_ENTITY) {
       this.categoriesToMatch.forEach((value, index) => {
         if ((value.name + value.gameCategoryId) == (sectionButton.recordName + sectionButton.recordId)) {
           this.categoriesToMatch[index].matchButtonClassField = "";
           this.categoriesToMatch.splice(index, 1);
         }
       });
-    } else if (sectionButton.objectType == "GameMode") {
+    } else if (sectionButton.objectType == Constants.GAME_MODE_ENTITY) {
       this.gameModesToMatch.forEach((value, index) => {
         if ((value.name + value.id) == (sectionButton.recordName + sectionButton.recordId)) {
           this.gameModesToMatch[index].matchButtonClassField = "";
           this.gameModesToMatch.splice(index, 1);
         }
       });
-    } else if (sectionButton.objectType == "Platform") {
+    } else if (sectionButton.objectType == Constants.PLATFORM_ENTITY) {
       this.platformsToMatch.forEach((value, index) => {
         if ((value.name + value.id) == (sectionButton.recordName + sectionButton.recordId)) {
           this.platformsToMatch[index].matchButtonClassField = "";

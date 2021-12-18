@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Constants } from 'src/app/constants';
+
 import { Game } from 'src/app/common/game/game';
 import { GameCategory } from 'src/app/common/game/game-category';
-import { Constants } from 'src/app/constants';
+
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -46,7 +48,7 @@ export class SimilarGamesComponent implements OnInit {
   }
 
   getGameUrl(game: Game) {
-    let gameUrl = Constants.SITE_URL + 'game/' + game.id;
+    let gameUrl = Constants.GAME_RECORD_URL + game.id;
     return gameUrl;
   }
 }

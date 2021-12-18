@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Game } from 'src/app/common/game/game';
 import { Constants } from 'src/app/constants';
+
+import { Game } from 'src/app/common/game/game';
+
 import { GameService } from 'src/app/services/game.service';
 
 @Component({

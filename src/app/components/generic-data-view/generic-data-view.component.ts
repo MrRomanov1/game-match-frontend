@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Game } from 'src/app/common/game/game';
 import { Constants } from 'src/app/constants';
+
+import { Game } from 'src/app/common/game/game';
 
 @Component({
   selector: 'app-generic-data-view',
@@ -23,7 +24,7 @@ export class GenericDataViewComponent implements OnInit {
   }
 
   getGameUrl (game: Game) {
-    let gameUrl = Constants.SITE_URL + 'game/' + game.id;
+    let gameUrl = Constants.GAME_RECORD_URL + game.id;
     return gameUrl;
   }
 

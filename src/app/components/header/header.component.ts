@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
+import { Constants } from 'src/app/constants';
 
 @Component({
   selector: 'app-header',
@@ -99,6 +100,6 @@ export class HeaderComponent implements OnInit {
   }
 
   showLogInMessage() {
-    this.messageService.add({ severity: 'info', summary: 'Dodaj grę', detail: 'Aby dodać grę do bazy należy się zalogować' });
+    this.messageService.add({ severity: 'info', summary: 'Dodaj grę', detail: Constants.ADD_GAME_LOGIN_TOAST });
   }
 }

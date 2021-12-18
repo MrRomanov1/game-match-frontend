@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
+import { Constants } from 'src/app/constants';
+
 import { Game } from 'src/app/common/game/game';
 import { GameCategory } from 'src/app/common/game/game-category';
-import { Constants } from 'src/app/constants';
 
 @Component({
   selector: 'app-game-match-list',
@@ -42,14 +43,14 @@ export class GameMatchListComponent implements OnInit {
 
   setSortOptions() {
     this.sortOptions = [
-      {label: 'Najwyżej oceniane', value: '!rating'},
-      {label: 'Najniżej oceniane', value: 'rating'},
-      {label: 'Najbardziej popularne', value: 'numberOfVotes'}
+      {label: Constants.HIGH_RATED_DATA_VIEW_SORT, value: '!rating'},
+      {label: Constants.LOW_RATED_DATA_VIEW_SORT, value: 'rating'},
+      {label: Constants.MOST_POPULAR_DATA_VIEW_SORT, value: 'numberOfVotes'}
   ];
   }
 
   getGameUrl(game: Game) {
-    let gameUrl = Constants.SITE_URL + 'game/' + game.id;
+    let gameUrl = Constants.GAME_RECORD_URL + game.id;
     return gameUrl;
   }
 }
