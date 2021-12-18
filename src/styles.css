@@ -17,8 +17,32 @@ body {
     text-transform: uppercase;
 }
 
+.p-menuitem-link:hover {
+    background-color: rgb(10, 90, 70) !important;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link {
+    background-color: rgb(10, 90, 70) !important;
+}
+
+.p-menuitem-link:focus {
+    box-shadow: none !important;
+}
+
 .p-menuitem-icon {
     color: white !important;
+}
+
+.p-submenu-icon {
+    color: white !important;
+}
+
+.p-submenu-list {
+    background-color: rgb(10, 90, 70) !important;
+}
+
+.p-menubar .p-menuitem.p-menuitem-active > .p-menuitem-link {
+    background-color: rgb(10, 189, 139) !important;
 }
 
 .p-card{
@@ -298,5 +322,20 @@ body {
 .match-header-sort.p-focus {
     box-shadow: none !important;
     border-color: seagreen !important
+}
+
+p-menubarsub{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 50px;
+}
+
+a.p-menubar-button{
+    order: 3;
+}
+
+a.p-menubar-button > .pi.pi-bars{
+    color: white;
 }
 

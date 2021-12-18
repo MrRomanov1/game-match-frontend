@@ -35,6 +35,11 @@ import { ChipModule } from 'primeng/chip';
 import { FormsModule } from '@angular/forms';
 import {KnobModule} from 'primeng/knob';
 import { SimilarGamesComponent } from './components/similar-games/similar-games.component';
+import { PopularGamesComponent } from './components/popular-games/popular-games.component';
+import { GenericDataViewComponent } from './components/generic-data-view/generic-data-view.component';
+import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
+import {ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -47,7 +52,10 @@ import { SimilarGamesComponent } from './components/similar-games/similar-games.
     SafePipe,
     HomePageComponent,
     GameMatchListComponent,
-    SimilarGamesComponent
+    SimilarGamesComponent,
+    PopularGamesComponent,
+    GenericDataViewComponent,
+    ComingSoonComponent
   ],
   imports: [
     BrowserModule,
@@ -69,11 +77,14 @@ import { SimilarGamesComponent } from './components/similar-games/similar-games.
     DialogModule,
     ChipModule,
     FormsModule,
-    KnobModule
+    KnobModule,
+    ToastModule
   ],
   providers: [GameService, 
     GameCategoryListService,
-    [{provide: LOCALE_ID, useValue: 'pl'}]],
+    [{provide: LOCALE_ID, useValue: 'pl'}],
+    MessageService
+  ],
   bootstrap: [AppComponent
   ],
   schemas:[NO_ERRORS_SCHEMA],

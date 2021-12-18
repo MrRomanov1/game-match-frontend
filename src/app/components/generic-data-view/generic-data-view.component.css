@@ -1,0 +1,31 @@
+.game-cover-img {
+    width: 200px;
+    height: 300px;
+    display: inline-block;
+  }  
+  
+  .game-cover-img:hover {
+    cursor: pointer;
+  }
+  
+  .match-grid-item-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items :center;
+  }
+  
+  .game-cover-img-list {
+    width: 150px;
+    height: 200px;
+    display: inline-block;
+    margin-right: 2rem;
+  }
+  
+  .game-cover-img-list:hover {
+    cursor: pointer;
+  }
+  
+  .link-no-decoration {
+    text-decoration: none;
+  }

@@ -5,4 +5,6 @@ export class Constants {
     /** error messages */
     static EMPTY_SEARCH: string = 'Nie znaleziono żadnych tytułów spełniających kryteria wyszukiwania';
   
+    /** dataView component types */
+    static POPULAR_DATA_VIEW_TYPE: string = 'popular';
 }
