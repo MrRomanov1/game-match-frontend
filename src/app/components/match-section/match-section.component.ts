@@ -1,10 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { GameCategoryListService } from 'src/app/services/game-category-list.service';
-import { GameCategory } from 'src/app/common/game/game-category';
+import { Component, OnInit } from '@angular/core';
+import { Constants } from 'src/app/constants';
+
 import { Game } from 'src/app/common/game/game';
+import { GameCategory } from 'src/app/common/game/game-category';
+import { GameMode } from 'src/app/common/game/game-mode';
+import { Platform } from 'src/app/common/game/platform';
+
 import { GameService } from 'src/app/services/game.service';
-import { Carousel } from 'primeng/carousel';
+import { GameCategoryListService } from 'src/app/services/game-category-list.service';
+import { GameModeService } from 'src/app/services/game-mode.service';
+import { PlatformService } from 'src/app/services/platform.service';
 
 @Component({
   selector: 'app-match-section',
@@ -13,31 +18,41 @@ import { Carousel } from 'primeng/carousel';
 })
 export class MatchSectionComponent implements OnInit {
 
-  @ViewChild('primeCarousel') primeCarousel: Carousel;
-
-  selectedItemsSingle: GameCategory[] = [];
+  /** selected items */
   selectedItems: GameCategory[] = [];
-  dropdownSettingsSingle: IDropdownSettings = {};
-  dropdownSettings: IDropdownSettings = {};
-  gameCategories: GameCategory[] = [];
-  emptyCategoryMessage: string = '';
-  categoriesToMatch: GameCategory[] = [];
-  matchedGames: Game[] = [];
+  sectionButtons: ButtonWrapper[] = [];
+
+  /** utils */
   runAgainFlag: Boolean = true;
 
-  
+  /** initial values */
+  gameCategories: GameCategory[] = [];
+  platforms: Platform[] = [];
+  gameModes: GameMode[] = [];
+
+  /** endpoint values */
+  categoriesToMatch: GameCategory[] = [];
+  platformsToMatch: Platform[] = [];
+  gameModesToMatch: GameMode[] = [];
+  gameParams: GameWrapper;
+
+  /** output values */
+  matchedGames: Game[] = [];
 
   constructor(
     private gameCategoryListService: GameCategoryListService,
-    private gameService: GameService) {  }
+    private gameService: GameService,
+    private gameModeService: GameModeService,
+    private platformService: PlatformService) { }
 
   ngOnInit(): void {
-    this.listGameCategories();
-    this.setDropdownSettings();
-    this.setDropdownSettingsSingle();
+    this.getGameCategories();
+    this.getPlatforms();
+    this.getGameModes();
   }
 
-  listGameCategories() {
+  /** initial callouts */
+  getGameCategories() {
     this.gameCategoryListService.getGameCategoryList().subscribe(
       data => {
         this.gameCategories = data;
@@ -45,110 +60,210 @@ export class MatchSectionComponent implements OnInit {
     )
   }
 
-  async getGamesByUserMatch(event: Event) {
-    this.gameService.getGameMatch(this.categoriesToMatch).then(
-      async data => {
-        this.matchedGames = await data;
-        this.primeCarousel.navBackward(event, 0);
+  getPlatforms() {
+    this.platformService.getPlatformList().subscribe(
+      data => {
+        this.platforms = data;
       }
     )
   }
 
-  setMatchingCategories() {
-    this.categoriesToMatch = [];
-    this.selectedItemsSingle.forEach((value) => {
-      this.categoriesToMatch.push(value);
-    });
-    this.selectedItems.forEach((value) => {
-      this.categoriesToMatch.push(value);
-    });
-  }
-
-  /**single multiselect dropdown handlers*/
-  handleSingleSelect(item: any) {
-    this.selectedItemsSingle = [];
-    this.selectedItemsSingle.push(item);
-    this.runAgainFlag = true;
-  }
-
-  handleSingleDeselect() {
-    this.selectedItemsSingle = [];
-    this.runAgainFlag = true;
-  }
-
-  /**multiple multiselect dropdown handlers*/
-  handleSelect(item: any) {
-    this.selectedItems.push(item);
-    this.runAgainFlag = true;
-  }
-
-  handleDeselect(item: any) {
-    this.selectedItems.forEach((value, index) => {
-      if (value.gameCategoryId == item.gameCategoryId) this.selectedItems.splice(index, 1);
-    });
-    this.runAgainFlag = true;
-  }
-
-  handleDeselectAll() {
-    this.selectedItems = [];
-    this.runAgainFlag = true;
-  }
-
-  handleSelectAll() {
-    this.selectedItems = [];
-    this.selectedItems = this.gameCategories;
-    this.runAgainFlag = true;
+  getGameModes() {
+    this.gameModeService.getGameModesList().subscribe(
+      data => {
+        this.gameModes = data;
+      }
+    )
   }
 
   /**gameMatch handlers */
-  handleUserMatch(event: Event) {
-    if (this.selectedItemsSingle.length == 0) {
-      this.emptyCategoryMessage = 'Należy wybrać podstawowe kryterium wyszukiwania';
-    } else if (this.selectedItemsSingle.length > 0 && this.runAgainFlag == true) {
-      this.emptyCategoryMessage = '';
-      this.setMatchingCategories();
+  handleUserMatch() {
+    let gameWrapper = new GameWrapper (this.categoriesToMatch,this.gameModesToMatch, this.platformsToMatch);
+    this.gameParams = gameWrapper;
+    if (this.sectionButtons.length > 0 && this.runAgainFlag == true) {
       try {
-        this.getGamesByUserMatch(event);
+        this.getGamesByUserMatch();
       } finally {
         this.runAgainFlag = false;
       }
-    } else {
+    } else if (this.sectionButtons.length == 0 && this.runAgainFlag == true) {
+      this.matchedGames = [];
     }
   }
-
-  /**dropdown settings */
-  setDropdownSettings() {
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'gameCategoryId',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 6,
-      allowSearchFilter: true
-    };
+  
+  async getGamesByUserMatch() {
+    this.gameService
+    .getGameMatch(this.gameParams)
+    .then(
+      async data => {
+        this.matchedGames = await data;
+      }
+    )
   }
 
-  setDropdownSettingsSingle() {
-    this.dropdownSettingsSingle = {
-      singleSelection: true,
-      idField: 'gameCategoryId',
-      textField: 'name',
-      itemsShowLimit: 1,
-      allowSearchFilter: true
-    };
+  /**item selection handlers */
+  handleSelectCategory(item: ButtonWrapper, category: GameCategory) {
+    this.sectionButtons.push(item);
+    this.categoriesToMatch.push(category);
+    this.runAgainFlag = true;
+    this.handleUserMatch();
   }
 
-  handleNextButtonClick(event: Event) {
-    this.primeCarousel.navForward(event);
+  handleDeselectCategory(item: ButtonWrapper, category: GameCategory) {
+    this.categoriesToMatch.forEach((value, index) => {
+      if (value.gameCategoryId == category.gameCategoryId) {
+        this.categoriesToMatch.splice(index, 1);
+      }
+    });
+    this.sectionButtons.forEach((value, index) => {
+      if ((value.recordName + value.recordId) == (item.recordName + item.recordId)) {
+        this.sectionButtons.splice(index, 1);
+      }
+    });
+    this.runAgainFlag = true;
+    this.handleUserMatch();
   }
 
-  handlePrevButtonClick(event: Event) {
-    this.primeCarousel.navBackward(event);
+  handleSelectMode(item: ButtonWrapper, gameMode: GameMode) {
+    this.sectionButtons.push(item);
+    this.gameModesToMatch.push(gameMode);
+    this.runAgainFlag = true;
+    this.handleUserMatch();
   }
 
-  handleOpenGameDetails() {
-    let gameIndex = this.primeCarousel.firstIndex();
-    window.open('game/' + this.matchedGames[gameIndex].id,  '_blank');
+  handleDeselectMode(item: ButtonWrapper, gameMode: GameMode) {
+    this.gameModesToMatch.forEach((value, index) => {
+      if (value.id == gameMode.id) {
+        this.gameModesToMatch.splice(index, 1);
+      }
+    });
+    this.sectionButtons.forEach((value, index) => {
+      if ((value.recordName + value.recordId) == (item.recordName + item.recordId)) {
+        this.sectionButtons.splice(index, 1);
+      }
+    });
+    this.runAgainFlag = true;
+    this.handleUserMatch();
+  }
+
+  handleSelectPlatform(item: ButtonWrapper, platform: Platform) {
+    this.sectionButtons.push(item);
+    this.platformsToMatch.push(platform);
+    this.runAgainFlag = true;
+    this.handleUserMatch();
+  }
+
+  handleDeselectPlatform(item: ButtonWrapper, platform: Platform) {
+    this.platformsToMatch.forEach((value, index) => {
+      if (value.id == platform.id) {
+        this.platformsToMatch.splice(index, 1);
+      }
+    });
+    this.sectionButtons.forEach((value, index) => {
+      if ((value.recordName + value.recordId) == (item.recordName + item.recordId)) {
+        this.sectionButtons.splice(index, 1);
+      }
+    });
+    this.runAgainFlag = true;
+    this.handleUserMatch();
+  }
+
+  handleCategoryButtonClick(category: GameCategory) {
+    if (category.matchButtonClassField == Constants.BUTTON_MATCH_ACTIVE_CLASS) {
+      category.matchButtonClassField = "";
+      let sectionButton = new ButtonWrapper(Constants.GAME_CATEGORY_ENTITY, category.name, category.gameCategoryId);
+      this.handleDeselectCategory(sectionButton, category);
+    } else {
+      category.matchButtonClassField = Constants.BUTTON_MATCH_ACTIVE_CLASS;
+      let sectionButton = new ButtonWrapper(Constants.GAME_CATEGORY_ENTITY, category.name, category.gameCategoryId);
+      this.handleSelectCategory(sectionButton, category);
+    }
+    this.handleUserMatch();
+  }
+
+  handleModeButtonClick(gameMode: GameMode) {
+    if (gameMode.matchButtonClassField == Constants.BUTTON_MATCH_ACTIVE_CLASS) {
+      gameMode.matchButtonClassField = "";
+      let sectionButton = new ButtonWrapper(Constants.GAME_MODE_ENTITY, gameMode.name, gameMode.id);
+      this.handleDeselectMode(sectionButton, gameMode);
+    } else {
+      gameMode.matchButtonClassField = Constants.BUTTON_MATCH_ACTIVE_CLASS;
+      let sectionButton = new ButtonWrapper(Constants.GAME_MODE_ENTITY, gameMode.name, gameMode.id);
+      this.handleSelectMode(sectionButton, gameMode);
+    }
+    this.handleUserMatch();
+  }
+
+  handlePlatformButtonClick(platform: Platform) {
+    if (platform.matchButtonClassField == Constants.BUTTON_MATCH_ACTIVE_CLASS) {
+      platform.matchButtonClassField = "";
+      let sectionButton = new ButtonWrapper(Constants.PLATFORM_ENTITY, platform.name, platform.id);
+      this.handleDeselectPlatform(sectionButton, platform);
+    } else {
+      platform.matchButtonClassField = Constants.BUTTON_MATCH_ACTIVE_CLASS;
+      let sectionButton = new ButtonWrapper(Constants.PLATFORM_ENTITY, platform.name, platform.id);
+      this.handleSelectPlatform(sectionButton, platform);
+    }
+    this.handleUserMatch();
+  }
+
+
+  handleSectionButtonClick(sectionButton: ButtonWrapper) {
+    this.sectionButtons.forEach((value, index) => {
+      if ((value.recordName + value.recordId) == (sectionButton.recordName + sectionButton.recordId)) {
+        this.sectionButtons.splice(index, 1);
+      }
+    });
+    if (sectionButton.objectType == Constants.GAME_CATEGORY_ENTITY) {
+      this.categoriesToMatch.forEach((value, index) => {
+        if ((value.name + value.gameCategoryId) == (sectionButton.recordName + sectionButton.recordId)) {
+          this.categoriesToMatch[index].matchButtonClassField = "";
+          this.categoriesToMatch.splice(index, 1);
+        }
+      });
+    } else if (sectionButton.objectType == Constants.GAME_MODE_ENTITY) {
+      this.gameModesToMatch.forEach((value, index) => {
+        if ((value.name + value.id) == (sectionButton.recordName + sectionButton.recordId)) {
+          this.gameModesToMatch[index].matchButtonClassField = "";
+          this.gameModesToMatch.splice(index, 1);
+        }
+      });
+    } else if (sectionButton.objectType == Constants.PLATFORM_ENTITY) {
+      this.platformsToMatch.forEach((value, index) => {
+        if ((value.name + value.id) == (sectionButton.recordName + sectionButton.recordId)) {
+          this.platformsToMatch[index].matchButtonClassField = "";
+          this.platformsToMatch.splice(index, 1);
+        }
+      });
+    }
+    this.runAgainFlag = true;
+    this.handleUserMatch();
+  }
+}
+
+export class ButtonWrapper {
+  objectType: string;
+  recordName: string;
+  recordId: BigInteger;
+
+  constructor(objectType: string, recordName: string, recordId: BigInteger) {
+    this.objectType = objectType;
+    this.recordName = recordName;
+    this.recordId = recordId;
+  }  
+}
+
+export class GameWrapper {
+  gameCategories: GameCategory[];
+  gameModes: GameMode[];
+  platforms: Platform[];
+
+  constructor(gameCategories: GameCategory[],
+      gameModes: GameMode[],
+      platforms: Platform[]
+  ) {
+      this.gameCategories = gameCategories;
+      this.gameModes = gameModes;
+      this.platforms = platforms;
   }
 }

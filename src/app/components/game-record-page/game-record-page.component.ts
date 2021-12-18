@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { GameCategory } from 'src/app/common/game/game-category';
-import { GameService } from 'src/app/services/game.service';
+import { Constants } from 'src/app/constants';
 
-const gameCategoryUrl = '/games/';
+import { GameCategory } from 'src/app/common/game/game-category';
+
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-game-record-page',
@@ -17,7 +18,7 @@ export class GameRecordPageComponent implements OnInit {
   mainGameCategory: GameCategory;
   alternateGameCategories: GameCategory[] = [];
 
-  constructor(private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute,
     private gameService: GameService) { }
 
   ngOnInit(): void {
@@ -25,7 +26,7 @@ export class GameRecordPageComponent implements OnInit {
       this.recordId = +params.get('recordId')!;
       this.getGameData();
     });
-    
+
   }
 
   getGameData() {
@@ -43,7 +44,7 @@ export class GameRecordPageComponent implements OnInit {
 
   splitGameCategories() {
     let iterator = 0;
-    for(let gameCategory of this.game.gameCategories) {
+    for (let gameCategory of this.game.gameCategories) {
       if (iterator == 0) {
         this.mainGameCategory = gameCategory;
       } else {
@@ -59,8 +60,19 @@ export class GameRecordPageComponent implements OnInit {
 
   getGameCategoryUrl(id: any) {
     let gameCategoryUrlById;
-    gameCategoryUrlById = gameCategoryUrl + id;
+    gameCategoryUrlById = Constants.GAME_CATEGORY_URL + id;
     return gameCategoryUrlById;
   }
 
+  getGameModeUrl(id: any) {
+    let gameModeUrlById;
+    gameModeUrlById = Constants.GAME_CATEGORY_URL + id;
+    return gameModeUrlById;
+  }
+
+  getPlatformUrl(id: any) {
+    let platformUrlById;
+    platformUrlById = Constants.GAME_CATEGORY_URL + id;
+    return platformUrlById;
+  }
 }

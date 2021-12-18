@@ -1,32 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GameCategory } from '../common/game/game-category';
 import { map } from 'rxjs/operators';
+import { GameWrapper } from '../components/match-section/match-section.component';
+import { Constants } from '../constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  private baseUrl = 'http://localhost:8080/games';
-  private gameListBaseUrl = 'http://localhost:8080/games-by-category';
-  private gameMatchUrl = 'http://localhost:8080/match'
-
   constructor(private httpClient: HttpClient) { }
 
-  getGameList(categoryName: any): Observable<any> {
-    return this.httpClient.get(this.gameListBaseUrl + "/" + categoryName);
+
+  getAllGames(): Observable<any> {
+    return this.httpClient.get(Constants.GAME_SERVICE_URL);
+  }
+
+  getNotReleasedGames(): Observable<any> {
+    return this.httpClient.get(Constants.GAMES_NOT_RELEASED_SERVICE_URL);
+  }
+
+  getPopularGames(): Observable<any> {
+    return this.httpClient.get(Constants.GAME_POPULAR_SERVICE_URL);
+  }
+
+  getHighRatedGames(): Observable<any> {
+    return this.httpClient.get(Constants.GAME_HIGH_RATE_SERVICE_URL);
+  }  
+
+  getGameListByCategory(categoryName: any): Observable<any> {
+    return this.httpClient.get(Constants.GAMES_BY_CATEGORY_SERVICE_URL + categoryName);
   }
 
   getSingleGame(recordId: any) {
-    this.baseUrl = this.baseUrl + "/" + recordId;
-    return this.httpClient.get(this.baseUrl);
+    return this.httpClient.get(Constants.GAME_SERVICE_URL + "/" + recordId);
   }
 
-  async getGameMatch(gameCategories: GameCategory[]): Promise<any> {
-    return await this.httpClient.post<GameCategory[]>(this.gameMatchUrl, gameCategories).pipe(
-      map((data: GameCategory[]) => data
+  async getGameMatch(gameParameters: GameWrapper): Promise<any> {
+    
+    return await this.httpClient.post<GameWrapper>(Constants.GAME_MATCH_SERVICE_URL, gameParameters).pipe(
+      map((data: GameWrapper) => data
       )).toPromise();
   }
 }

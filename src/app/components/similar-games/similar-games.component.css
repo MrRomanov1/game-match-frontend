@@ -1,0 +1,13 @@
+.game-cover-img {
+    width: 150px;
+}
+
+.similar-game {
+    display: block;
+    text-align: center;
+}
+
+.link-no-decoration {
+    text-decoration: none;
+    color: white;
+}

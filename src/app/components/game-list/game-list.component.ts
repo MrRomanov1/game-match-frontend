@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService } from 'src/app/services/game.service';
-import { Game } from 'src/app/common/game/game';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Constants } from 'src/app/constants';
 
-const gameUrl = '/game/';
+import { Game } from 'src/app/common/game/game';
+
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-game-list',
@@ -12,32 +13,75 @@ const gameUrl = '/game/';
 })
 export class GameListComponent implements OnInit {
 
-  categoryName: String;
+  categoryAlias: String;
   games: Game[];
+  componentType: string;
 
   constructor(private route: ActivatedRoute,
     private gameService: GameService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.categoryName = params.get('categoryName')!;
-      this.getGameList();
-    });
+      if (params.keys.length != 0) {
+        if (params.get('listParam') == Constants.COMING_SOON_DATA_VIEW_TYPE) {   
+          this.componentType = Constants.COMING_SOON_DATA_VIEW_TYPE;       
+          this.getNotYetReleasedGames();          
+        } else if (params.get('listParam') == Constants.POPULAR_DATA_VIEW_TYPE) {
+          this.componentType = Constants.POPULAR_DATA_VIEW_TYPE;
+          this.getPopularGames();
 
+        } else if (params.get('listParam') == Constants.HIGHEST_RATING_DATA_VIEW_TYPE) {
+          this.componentType = Constants.HIGHEST_RATING_DATA_VIEW_TYPE;
+          this.getHighRatedGames();
+
+        } else {
+          this.componentType = Constants.GENERIC_DATA_VIEW_TYPE;
+          this.categoryAlias = params.get('listParam')!;
+          this.getGameListByCategories();
+        }
+      } else {
+        this.getAllGames();
+      }
+    });
   }
 
-  getGameList() {
-    this.gameService.getGameList(this.categoryName).subscribe(
+  getGameListByCategories() {
+    this.gameService.getGameListByCategory(this.categoryAlias).subscribe(
       data => {
         this.games = data;
-        console.log(data);
       }
     )
   }
 
-  getGameUrl(id: any) {
-    let gameCategoryUrlById;
-    gameCategoryUrlById = gameUrl + id;
-    return gameCategoryUrlById;
+  getAllGames() {
+    this.gameService.getAllGames().subscribe(
+      data => {
+        this.games = data;
+      }
+    )
+  }
+
+  getPopularGames() {
+    this.gameService.getPopularGames().subscribe(
+      data => {
+        this.games = data;
+      }
+    )
+  }
+
+  getHighRatedGames() {
+    this.gameService.getHighRatedGames().subscribe(
+      data => {
+        this.games = data;
+      }
+    )
+  }
+
+  getNotYetReleasedGames() {
+    this.gameService.getNotReleasedGames().subscribe(
+      data => {
+        this.games = data;
+      }
+    )
   }
 }

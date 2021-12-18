@@ -1,22 +1,22 @@
 <app-header-ad-banner></app-header-ad-banner>
-<div class="container">
-    <div class="card my-5 border-0">
-        <div class="row">
-            <div class="col-10">
-                <div class="row">                    
-                    <div class="col-md-2">
+<div class="grid">
+    <p-card class="my-5 px-3 py-3 border-0 record-page-card col-10 col-offset-1">
+        <div class="grid">
+            <div class="col-9">
+                <div class="grid">                    
+                    <div class="col-3">
                         <img src={{game.imageUrl}} class="game-cover-img" alt={{game.title}}>
                     </div>
-                    <div class="col-md-9 ms-md-3">
+                    <div class="col-8 ms-md-3">
                         <div class="card-body">
-                            <h3 class="card-title mb-4 ms-md-2">{{game.title}}</h3>
-                            <p class="card-text text-justify lead">{{game.description}}</p>
+                            <h2 class="mb-4 ms-md-2 record-page-title">{{game.title}}</h2>
+                            <p class="text-justify record-page-description">{{game.description}}</p>
                         </div>
                     </div>
                 </div>
-                <div class="row mt-5">                    
+                <div class="grid mt-5">                    
                     <div class="col-12 col-md-11">
-                        <h3 class="mb-4">Trailer</h3>
+                        <h2 class="mb-4">Trailer</h2>
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item col-lg-12 col-md-12 col-sm-12"
                                 [src]="game.trailerUrl | safe" title="{{game.title}} trailer"
@@ -26,40 +26,49 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-5" *ngIf="game.descriptionFirst">                    
+                <div class="grid mt-5" *ngIf="game.descriptionFirst">                    
                     <div class="col-12 col-md-11">
-                        <h3 class="mb-4">{{game.descriptionFirstHeader}}</h3>
-                        <p class="text-justify lead">{{game.descriptionFirst}}</p>
+                        <h2 class="mb-4">{{game.descriptionFirstHeader}}</h2>
+                        <p class="text-justify record-page-description">{{game.descriptionFirst}}</p>
                     </div>
                 </div>
-                <div class="row mt-5" *ngIf="game.systemMinimumRequirements || game.systemRecommendedRequirements">
+                <div class="grid mt-5" *ngIf="game.systemMinimumRequirements || game.systemRecommendedRequirements">
                     <div class="col-12 col-md-11">
-                        <h4 class="mb-4">Wymagania sprzętowe</h4>
+                        <h2 class="mb-4">Wymagania sprzętowe</h2>
                         <p class="text-justify" *ngIf="game.systemMinimumRequirements"><strong>MINIMALNE:</strong> {{game.systemMinimumRequirements}}</p>
                         <p class="text-justify" *ngIf="game.systemRecommendedRequirements"><strong>ZALECANE:</strong> {{game.systemRecommendedRequirements}}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-2">
-                <h5 class="mb-4">INFORMACJE</h5>
-                <!-- TODO ratingi z kolorkami/ikonkami -->
+            <div class="col-3">
+                <h3 class="mb-4">INFORMACJE</h3>
+                <p class="mt-2 mb-2">Ocena użytkowników:</p>
+                <p-rating [(ngModel)]="game.rating" [readonly]="true" [cancel]="false"></p-rating>
                 <p class="mt-2 mb-0">Data wydania:</p>
                 <p>{{game.releaseDate | date: 'dd LLLL YYYY'}}</p>
-                <p class="mt-2 mb-0">Gatunek:</p>                
-                <a href={{getGameCategoryUrl(mainGameCategory.name)}}>{{mainGameCategory.name}}</a> <!-- lista gatunków -->
+                <p class="mt-2 mb-0">Gatunek:</p> 
+                <div class="custom-link-block d-inline-block">             
+                    <a href={{getGameCategoryUrl(mainGameCategory.alias)}} class="custom-link">{{mainGameCategory.name}}</a> <!-- lista gatunków -->
+                </div>  
                 <!-- TODO -->
                 <p class="mt-2 mb-0">Kategorie:</p>    
-                <div class="d-inline" *ngFor="let tempGameCat of alternateGameCategories">          
-                    <a href="{{getGameCategoryUrl(tempGameCat.name)}}">{{tempGameCat.name}}</a><span>&#160;&#160;</span><!-- lista kategorii -->       
+                <div class="custom-link-block d-inline-block mr-3" *ngFor="let tempGameCat of alternateGameCategories">          
+                    <a href="{{getGameCategoryUrl(tempGameCat.alias)}}" class="custom-link">{{tempGameCat.name}}</a><!-- lista kategorii -->       
                 </div>           
                 <!-- TODO -->
                 <p class="mt-2 mb-0">Tryby gry:</p>
-                <a href="#">single player</a> <!-- lista trybów -->
+                <div class="custom-link-block d-inline-block mr-3" *ngFor="let tempGameMode of game.gameModes">
+                    <a href="{{getGameModeUrl(tempGameMode.name)}}"class="custom-link">{{tempGameMode.name}}</a>
+                </div>
+                 <!-- lista trybów -->
                 <!-- TODO -->
                 <p class="mt-2 mb-0">Platformy:</p> <!-- TODO lista z platformami + ikonki-->
-                <p>PC</p>
-                <h5 class="my-4">PODOBNE GRY</h5>
+                <div class="custom-link-block d-inline-block mr-3" *ngFor="let tempPlatform of game.platforms">
+                    <a href="{{getPlatformUrl(tempPlatform.type)}}"class="custom-link">{{tempPlatform.name}}</a>
+                </div>
+                <h2 class="my-4">PODOBNE GRY</h2>
+                <app-similar-games [gameCategory]="mainGameCategory" [currentGame]="game"></app-similar-games>
             </div>
         </div>
-    </div>
+    </p-card>
 </div>

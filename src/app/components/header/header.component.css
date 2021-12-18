@@ -1,0 +1,23 @@
+.page-logo {
+    height: 95px;
+    display: block;
+}
+
+.user-login-buttons {
+    display: flex;
+}
+
+.login-button {
+    background-color: rgb(13, 128, 95);
+    color: white;
+}
+
+.login-button:focus {
+    background-color: rgb(13, 128, 95);
+    box-shadow: none;
+}
+
+.login-button:enabled:hover {
+    background-color: rgb(10, 90, 70);
+    color: white;
+}

@@ -1,0 +1,6 @@
+<div class="similar-game" *ngFor="let tempGame of games | slice:0:4;">
+        <a href="{{getGameUrl(tempGame)}}" class="link-no-decoration">
+                <img src={{tempGame.imageUrl}} class="game-cover-img" alt={{tempGame.title}}>
+                <h3>{{tempGame.title}}</h3>
+        </a>
+</div>
