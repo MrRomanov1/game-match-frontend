@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/app/common/game/game';
+import { Constants } from 'src/app/constants';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { GameService } from 'src/app/services/game.service';
 export class ComingSoonComponent implements OnInit {
 
   games: Game[];
+  componentType: string = Constants.COMING_SOON_DATA_VIEW_TYPE;
 
   dateToday = + new Date();
 

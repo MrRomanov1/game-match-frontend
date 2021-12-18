@@ -48,12 +48,12 @@
                 <p>{{game.releaseDate | date: 'dd LLLL YYYY'}}</p>
                 <p class="mt-2 mb-0">Gatunek:</p> 
                 <div class="custom-link-block d-inline-block">             
-                    <a href={{getGameCategoryUrl(mainGameCategory.name)}} class="custom-link">{{mainGameCategory.name}}</a> <!-- lista gatunków -->
+                    <a href={{getGameCategoryUrl(mainGameCategory.alias)}} class="custom-link">{{mainGameCategory.name}}</a> <!-- lista gatunków -->
                 </div>  
                 <!-- TODO -->
                 <p class="mt-2 mb-0">Kategorie:</p>    
                 <div class="custom-link-block d-inline-block mr-3" *ngFor="let tempGameCat of alternateGameCategories">          
-                    <a href="{{getGameCategoryUrl(tempGameCat.name)}}" class="custom-link">{{tempGameCat.name}}</a><!-- lista kategorii -->       
+                    <a href="{{getGameCategoryUrl(tempGameCat.alias)}}" class="custom-link">{{tempGameCat.name}}</a><!-- lista kategorii -->       
                 </div>           
                 <!-- TODO -->
                 <p class="mt-2 mb-0">Tryby gry:</p>
@@ -64,7 +64,7 @@
                 <!-- TODO -->
                 <p class="mt-2 mb-0">Platformy:</p> <!-- TODO lista z platformami + ikonki-->
                 <div class="custom-link-block d-inline-block mr-3" *ngFor="let tempPlatform of game.platforms">
-                    <a href="{{getPlatformUrl(tempPlatform.name)}}"class="custom-link">{{tempPlatform.name}}</a>
+                    <a href="{{getPlatformUrl(tempPlatform.type)}}"class="custom-link">{{tempPlatform.name}}</a>
                 </div>
                 <h2 class="my-4">PODOBNE GRY</h2>
                 <app-similar-games [gameCategory]="mainGameCategory" [currentGame]="game"></app-similar-games>

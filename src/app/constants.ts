@@ -7,4 +7,6 @@ export class Constants {
   
     /** dataView component types */
     static POPULAR_DATA_VIEW_TYPE: string = 'popular';
+    static COMING_SOON_DATA_VIEW_TYPE: string = 'coming-soon';
+    static GENERIC_DATA_VIEW_TYPE: string = 'generic'
 }

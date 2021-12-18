@@ -1,21 +1,8 @@
 <app-header-ad-banner></app-header-ad-banner>
-<div class="container">
-    <div class="card my-5 border-0">
-        <div class="row">
-            <div class="col-10">
-                <app-generic-data-view [games]="games"></app-generic-data-view>
-                <div class="row">
-                    <div class="card my-3 border-0 d-inline col-3" *ngFor="let tempGame of games">
-                        <a href={{getGameUrl(tempGame.id)}}>
-                            <img src={{tempGame.imageUrl}} class="game-cover-img" alt={{tempGame.title}}>
-                            <!-- TODO HOVER -->
-                            <!-- TODO SMALLER SCREENS -->
-                        </a>
-                        <h5>{{tempGame.title}}</h5>
-                    </div>
-                </div>
-            </div>
+<div class="grid">
+    <p-card class="card my-5 border-0 col-10 col-offset-1">
+        <div>
+            <app-generic-data-view [games]="games" [componentType]="componentType"></app-generic-data-view>
         </div>
-    </div>
+    </p-card>
 </div>
-<!-- TODO SEARCH NAV, FILTERS ETC -->

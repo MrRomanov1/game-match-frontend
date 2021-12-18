@@ -10,6 +10,8 @@ import { GameWrapper } from '../components/match-section/match-section.component
 export class GameService {
 
   private baseUrl = 'http://localhost:8080/games';
+  private popularGamesUrl = 'http://localhost:8080/games/popular';
+  private highRatedGamesUrl = 'http://localhost:8080/games/highest-rating';
   private gameListBaseUrl = 'http://localhost:8080/games-by-category';
   private gameMatchUrl = 'http://localhost:8080/match'
   private notReleasedGamesUrl = 'http://localhost:8080/games/not-released'
@@ -25,7 +27,15 @@ export class GameService {
     return this.httpClient.get(this.notReleasedGamesUrl);
   }
 
-  getGameList(categoryName: any): Observable<any> {
+  getPopularGames(): Observable<any> {
+    return this.httpClient.get(this.popularGamesUrl);
+  }
+
+  getHighRatedGames(): Observable<any> {
+    return this.httpClient.get(this.highRatedGamesUrl);
+  }  
+
+  getGameListByCategory(categoryName: any): Observable<any> {
     return this.httpClient.get(this.gameListBaseUrl + "/" + categoryName);
   }
 

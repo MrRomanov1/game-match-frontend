@@ -24,7 +24,7 @@ export class SimilarGamesComponent implements OnInit {
   }
 
   getGameList() {
-    this.gameService.getGameList(this.gameCategory.name).subscribe(
+    this.gameService.getGameListByCategory(this.gameCategory.alias).subscribe(
       data => {
         this.games = data;
       },

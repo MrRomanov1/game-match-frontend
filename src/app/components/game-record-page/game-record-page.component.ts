@@ -17,7 +17,7 @@ export class GameRecordPageComponent implements OnInit {
   mainGameCategory: GameCategory;
   alternateGameCategories: GameCategory[] = [];
 
-  constructor(private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute,
     private gameService: GameService) { }
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class GameRecordPageComponent implements OnInit {
       this.recordId = +params.get('recordId')!;
       this.getGameData();
     });
-    
+
   }
 
   getGameData() {
@@ -43,7 +43,7 @@ export class GameRecordPageComponent implements OnInit {
 
   splitGameCategories() {
     let iterator = 0;
-    for(let gameCategory of this.game.gameCategories) {
+    for (let gameCategory of this.game.gameCategories) {
       if (iterator == 0) {
         this.mainGameCategory = gameCategory;
       } else {
@@ -74,5 +74,4 @@ export class GameRecordPageComponent implements OnInit {
     platformUrlById = gameCategoryUrl + id;
     return platformUrlById;
   }
-
 }

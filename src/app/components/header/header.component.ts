@@ -33,47 +33,46 @@ export class HeaderComponent implements OnInit {
           {
             label: 'Popularne',
             icon: 'pi pi-star-fill',
-            routerLink: 'games'
+            routerLink: 'games/popular'
           },
           {
             label: 'Nadchodzące',
             icon: 'pi pi-calendar-plus',
-            routerLink: 'games'
+            routerLink: 'games/coming-soon'
           },
           {
             label: 'Njwyżej oceniane',
             icon: 'pi pi-chart-line',
-            routerLink: 'games'
+            routerLink: 'games/highest-rating'
           },
           {
             label: 'Platformy',
             icon: 'pi pi-tags',
-            routerLink: 'games',
             items: [
               {
                 label: 'PC',
                 icon: 'pi pi-microsoft',
-                routerLink: 'games'
+                routerLink: 'games/PC'
               },
               {
                 label: 'XBOX',
                 icon: 'fab fa-xbox',
-                routerLink: 'games'
+                routerLink: 'games/Xbox'
               },
               {
                 label: 'PlayStation',
                 icon: 'fab fa-playstation',
-                routerLink: 'games'
+                routerLink: 'games/PlayStation'
               },
               {
                 label: 'Nintendo',
                 icon: 'fas fa-gamepad',
-                routerLink: 'games'
+                routerLink: 'games/Nintendo'
               },
               {
                 label: 'Mobilne',
                 icon: 'fas fa-mobile-alt',
-                routerLink: 'games'
+                routerLink: 'games/Mobile'
               }
             ]
           }

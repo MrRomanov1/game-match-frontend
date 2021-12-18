@@ -13,6 +13,9 @@ export class GenericDataViewComponent implements OnInit {
   @Input() componentType: string;
   emptyMessage: string = Constants.EMPTY_SEARCH;
 
+  /** component config */
+  shortDate: boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -27,10 +30,22 @@ export class GenericDataViewComponent implements OnInit {
   setComponentConfig() {
     if (this.componentType == Constants.POPULAR_DATA_VIEW_TYPE) {
       this.setComponentConfigToPopular();
+    } else if (this.componentType == Constants.COMING_SOON_DATA_VIEW_TYPE) {
+      this.setComponentConfigToComingSoon();
+    } else if (this.componentType == Constants.GENERIC_DATA_VIEW_TYPE) {
+      this.setComponentConfigToGeneric();
     }
   }
 
   setComponentConfigToPopular() {
+    this.shortDate = true;
+  }
 
+  setComponentConfigToComingSoon() {
+    this.shortDate = false;
+  }
+
+  setComponentConfigToGeneric() {
+    this.shortDate = true;
   }
 }
