@@ -7,8 +7,6 @@ import { Constants } from '../constants';
   providedIn: 'root'
 })
 export class GameModeService {
-
-  private baseUrl = 'http://localhost:8080/game-modes';
   
   constructor(private httpClient: HttpClient) { }
 
