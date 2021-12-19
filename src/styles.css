@@ -3,6 +3,8 @@ body {
     background-color: #132122;
     background-repeat: no-repeat;
     background-size: cover;
+    margin: 0 0 0 0;
+    overflow-x: hidden;
 }
 
 .p-menubar{
@@ -339,3 +341,6 @@ a.p-menubar-button > .pi.pi-bars{
     color: white;
 }
 
+p-card.footer-card {
+    background: none !important;
+}
