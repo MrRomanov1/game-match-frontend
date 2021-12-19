@@ -23,6 +23,9 @@ import { SimilarGamesComponent } from './components/similar-games/similar-games.
 import { PopularGamesComponent } from './components/popular-games/popular-games.component';
 import { GenericDataViewComponent } from './components/generic-data-view/generic-data-view.component';
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ReleaseNotesComponent } from './components/footer-links/release-notes/release-notes.component';
+import { FuturePlansComponent } from './components/footer-links/future-plans/future-plans.component';
 
 /** services */
 import { GameService } from './services/game.service';
@@ -61,7 +64,10 @@ import { MessageService } from 'primeng/api';
     SimilarGamesComponent,
     PopularGamesComponent,
     GenericDataViewComponent,
-    ComingSoonComponent
+    ComingSoonComponent,
+    FooterComponent,
+    ReleaseNotesComponent,
+    FuturePlansComponent
   ],
   imports: [
     BrowserModule,
