@@ -24,7 +24,7 @@ export class GenericDataViewComponent implements OnInit {
   }
 
   getGameUrl (game: Game) {
-    let gameUrl = Constants.GAME_RECORD_URL + game.id;
+    let gameUrl = Constants.GAME_RECORD_URL + game.alias;
     return gameUrl;
   }
 

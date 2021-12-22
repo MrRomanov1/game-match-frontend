@@ -13,7 +13,7 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class GameRecordPageComponent implements OnInit {
 
-  recordId: number;
+  gameAlias: string;
   game: any;
   mainGameCategory: GameCategory;
   alternateGameCategories: GameCategory[] = [];
@@ -23,14 +23,14 @@ export class GameRecordPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.recordId = +params.get('recordId')!;
+      this.gameAlias = params.get('gameAlias')!;
       this.getGameData();
     });
 
   }
 
   getGameData() {
-    this.gameService.getSingleGame(this.recordId).subscribe(
+    this.gameService.getSingleGame(this.gameAlias).subscribe(
       data => {
         this.game = data;
       },

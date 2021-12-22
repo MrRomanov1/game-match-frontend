@@ -7,7 +7,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 
 const routes: Routes = [
     {path: '', component: HomePageComponent},
-    {path: 'game/:recordId', component: GameRecordPageComponent},
+    {path: 'game/:gameAlias', component: GameRecordPageComponent},
     {path: 'games/:listParam', component: GameListComponent},
     {path: 'games', component: GameListComponent},
     {path: 'release-notes', component: ReleaseNotesComponent},

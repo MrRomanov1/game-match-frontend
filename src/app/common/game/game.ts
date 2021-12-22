@@ -5,6 +5,7 @@ import { Platform } from "./platform";
 export class Game {
     id: BigInteger;
     title: string;
+    alias: string;
     description: string;
     descriptionFirstHeader: string;
     descriptionFirst: string;
