@@ -33,8 +33,8 @@ export class GameService {
     return this.httpClient.get(Constants.GAMES_BY_CATEGORY_SERVICE_URL + categoryName);
   }
 
-  getSingleGame(recordId: any) {
-    return this.httpClient.get(Constants.GAME_SERVICE_URL + "/" + recordId);
+  getSingleGame(gameAlias: any) {
+    return this.httpClient.get(Constants.GAME_SERVICE_URL + "/" + gameAlias);
   }
 
   async getGameMatch(gameParameters: GameWrapper): Promise<any> {
