@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { registerLocaleData } from '@angular/common';
+import { LocationStrategy, PathLocationStrategy, registerLocaleData } from '@angular/common';
 import localePl from '@angular/common/locales/pl';
 import { LOCALE_ID, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -90,11 +90,12 @@ import { MessageService } from 'primeng/api';
     FormsModule,
     KnobModule,
     ToastModule
-  ],
+  ],  
   providers: [GameService, 
     GameCategoryListService,
     [{provide: LOCALE_ID, useValue: 'pl'}],
-    MessageService
+    MessageService,
+    { provide: LocationStrategy, useClass: PathLocationStrategy }
   ],
   bootstrap: [AppComponent
   ],

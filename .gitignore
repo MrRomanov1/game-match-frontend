@@ -45,6 +45,7 @@ slajd2test.jpg
 # System Files
 .DS_Store
 Thumbs.db
+.htaccess
 
 # game covers
 src/assets/gamecover
