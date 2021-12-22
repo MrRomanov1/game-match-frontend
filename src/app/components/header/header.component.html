@@ -1,0 +1,17 @@
+<p-menubar [model]="items" styleClass="nav-menu" [style]="{'background': 'none'}" [autoDisplay]="false">
+  <ng-template pTemplate="start">
+    <a href="/">
+      <img src="/assets/static_resources/logo.svg" height="40" class="page-logo p-mr-2">
+    </a>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div class="user-login-buttons" *ngIf="userLoggedIn == false">
+      <button pButton type="button" label="Logowanie" class="p-button-text mx-2 login-button"></button>
+      <button pButton type="button" label="Rejestracja" class="p-button-text mx-2 login-button"></button>
+    </div>
+    <!-- TODO -->
+    <!-- UI stuff i.e. notification bell, config, logout etc. -->
+  </ng-template>
+</p-menubar>
+<p-toast position="top-center">
+</p-toast>

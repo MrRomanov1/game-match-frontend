@@ -39,7 +39,13 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+slajd1test.jpg
+slajd2test.jpg
 
 # System Files
 .DS_Store
 Thumbs.db
+.htaccess
+
+# game covers
+src/assets/gamecover

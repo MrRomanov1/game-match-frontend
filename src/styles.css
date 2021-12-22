@@ -1,1 +1,346 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background-image: url("/assets/static_resources/Background.png");
+    background-color: #132122;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 0 0 0;
+    overflow-x: hidden;
+}
+
+.p-menubar{
+    background: none;
+    border: none !important;
+    color: white !important;
+}
+
+.p-menuitem-text {
+    color: white !important;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.p-menuitem-link:hover {
+    background-color: rgb(10, 90, 70) !important;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem.p-menuitem-active > .p-menuitem-link {
+    background-color: rgb(10, 90, 70) !important;
+}
+
+.p-menuitem-link:focus {
+    box-shadow: none !important;
+}
+
+.p-menuitem-icon {
+    color: white !important;
+}
+
+.p-submenu-icon {
+    color: white !important;
+}
+
+.p-submenu-list {
+    background-color: rgb(10, 90, 70) !important;
+}
+
+.p-menubar .p-menuitem.p-menuitem-active > .p-menuitem-link {
+    background-color: rgb(10, 189, 139) !important;
+}
+
+.p-card{
+    background: rgba(34, 37, 42, 0.2) !important;
+    color: white !important;
+}
+
+.p-tabview-panels{
+    background: none !important;
+}
+
+.p-tabview-nav {
+    background: none !important;
+    border-color: rgb(11, 32, 31) !important;
+}
+
+.p-tabview-nav-content > .p-tabview-nav > .p-highlight {
+    background-color: rgb(11, 32, 31) !important;
+}
+
+.p-tabview-nav-link {
+    background: none !important;
+    border-color: rgb(11, 32, 31) !important;
+}
+
+.p-tabview-nav-link:hover {
+    background-color: rgb(11, 32, 31) !important;
+}
+
+.p-tabview-nav-link:focus {
+    box-shadow: none !important;
+}
+
+
+.p-tabview-title {
+    text-transform: uppercase !important;
+    font-weight: 400 !important;
+    color: white !important;
+}
+
+.button-match{
+    background-color: rgba(10, 189, 139, 0.9) !important;
+    border: none !important;
+}
+
+.button-match:hover{
+    background-color: rgb(13, 128, 95) !important;
+}
+
+.button-match-active{
+    background: none !important;
+}
+
+.p-chip {
+    background: none !important;
+    color: white;
+    border: none;
+    box-shadow: 0px 1px 7px rgb(0 0 0 / 10%), 0px 4px 5px -2px rgb(0 0 0 / 12%), 0px 10px 15px -5px rgb(0 0 0 / 20%) !important;
+}
+
+.p-chip-text {
+    font-size: 12px !important;
+    color: white !important;
+}
+
+.p-dataview {
+    background: none !important;
+}
+
+.p-dataview .p-paginator-bottom {
+    border-color: rgb(11, 32, 31);    
+}
+
+.p-dataview-header {
+    background: none !important;
+    border: none !important;
+}
+
+.p-dataview-content {
+    background: none !important;
+}
+
+.p-paginator-bottom {
+    background: none !important;
+}
+
+.match-platform-button {
+    background: none !important;
+    height: 1.9rem !important;
+    width: 1.9rem !important;
+    float: right !important;
+    border: none !important;
+    cursor: default !important;
+}
+
+.match-platform-button-list {
+    background: none !important;
+    height: 1.9rem !important;
+    width: 1.9rem !important;
+    border: none !important;
+    cursor: default !important;
+}
+
+.match-platform-button > span {
+    font-size: 12px !important;    
+}
+
+.match-grid-item-bottom {
+    display: flex !important;
+    justify-content: space-around;
+}
+
+.match-knob {
+    align-self: flex-start !important;
+}
+
+.match-grid-item-top {
+    display: flex !important;
+}
+
+.match-category-tag {
+    color: white;
+}
+
+.game-name {
+    color: white;
+}
+
+.game-name-list {
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.match-grid-item {    
+    border-radius: 4%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.match-list-item {
+    display: flex;
+}
+
+.game-list-detail {
+    flex: 1 1 0;
+}
+
+.match-button-favourites {
+    background-color: rgba(10, 189, 139, 0.9) !important;
+    border: none !important;
+}
+
+.match-category-tag {
+    text-transform: uppercase;
+}
+
+.p-paginator-bottom > button {
+    background: none !important;
+    color: white !important;
+}
+
+.p-paginator-bottom > button:hover {
+    background-color: rgb(18,38,39) !important;
+    color: white !important;
+}
+
+.p-paginator-bottom > button:focus {
+    box-shadow: none;
+}
+
+.p-paginator-bottom > .p-paginator-pages > button {
+    background: none !important;
+    color: white !important;
+}
+
+.p-paginator-bottom > .p-paginator-pages > button:hover {
+    background-color: rgb(20,40,40) !important;
+    color: white !important;
+}
+
+.p-paginator-bottom > .p-paginator-pages > button:focus {
+    box-shadow: none;
+}
+
+.p-paginator-bottom > .p-paginator-pages > button.p-highlight{
+    background-color: rgb(18,38,39) !important;
+    color: white !important;
+}
+
+.match-layout-options {
+    float: right !important;
+}
+
+.p-dataview-layout-options > button {
+    background: none !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0px 1px 7px rgb(0 0 0 / 10%), 0px 4px 5px -2px rgb(0 0 0 / 12%), 0px 10px 15px -5px rgb(0 0 0 / 20%) !important;
+}
+
+.p-dataview-layout-options > button.p-highlight {
+    background-color: rgb(18,38,39) !important;
+}
+
+.p-rating > .pi-star{
+    color: rgb(13, 128, 95) !important;
+}
+
+.p-rating > .pi-star:focus{
+    box-shadow: none !important;
+}
+
+.p-rating > .pi-star-fill{
+    color: rgb(13, 128, 95) !important;
+}
+
+.p-rating > .pi-star-fill:focus{
+    box-shadow: none !important;
+}
+
+.p-knob-text {
+    font-size: 2rem !important;
+}
+
+.match-knob-list {
+    align-self: flex-end !important;
+}
+
+.p-dataview.p-dataview-list .p-dataview-content > .p-grid > div {    
+    border-color: rgb(11, 32, 31) !important;
+}
+
+.p-dataview-emptymessage {
+    color: white !important;
+}
+
+.match-header-search > input{
+    background-color:rgba(34, 37, 42, 0.2);
+    color: white !important;
+}
+
+.match-header-search > input:hover{
+    border-color: seagreen !important;
+}
+
+.match-header-search > input:focus{
+    box-shadow: none !important;
+    border-color: seagreen !important;
+}
+
+.match-header-search > input::placeholder{
+    color: white !important;
+}
+
+.match-search-icon {
+    color: white !important;
+}
+
+.match-header-sort {
+    background: none !important;
+    color: white !important;
+}
+
+.match-header-sort > span {
+    color: white !important;
+}
+
+.match-header-sort > .p-dropdown-trigger  {
+    color: white !important;
+}
+
+.match-header-sort:hover {
+    border-color: seagreen !important
+}
+
+.match-header-sort.p-focus {
+    box-shadow: none !important;
+    border-color: seagreen !important
+}
+
+p-menubarsub{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 50px;
+}
+
+a.p-menubar-button{
+    order: 3;
+}
+
+a.p-menubar-button > .pi.pi-bars{
+    color: white;
+}
+
+p-card.footer-card {
+    background: none !important;
+}
