@@ -6,7 +6,7 @@
             </ng-template>
             <div class="grid">
                 <div class="col-12">
-                    <p-tabView>
+                    <p-tabView [scrollable]="(isScreenSmall$ | async)!">
                         <p-tabPanel header="Platformy">
                             <div *ngFor="let platform of platforms" class="platform-block text-center mt-2">
                                 <div class="platform-box mx-2 my-2 shadow-20" (click)="handlePlatformButtonClick(platform)"
@@ -55,8 +55,7 @@
             <div class="grid" *ngIf="matchedGames.length > 0">
                 <app-game-match-list class="col-12" [matchedGames]="matchedGames"
                     [categoriesToMatch]="categoriesToMatch"></app-game-match-list>
-                <div class="col-1"></div>
-                <div class="col-11">
+                <div class="col-11 col-offset-1">
                 </div>
             </div>
         </p-card>

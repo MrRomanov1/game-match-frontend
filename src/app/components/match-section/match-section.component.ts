@@ -10,6 +10,8 @@ import { GameService } from 'src/app/services/game.service';
 import { GameCategoryListService } from 'src/app/services/game-category-list.service';
 import { GameModeService } from 'src/app/services/game-mode.service';
 import { PlatformService } from 'src/app/services/platform.service';
+import { fromEvent, Observable } from 'rxjs';
+import { debounceTime, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-match-section',
@@ -24,6 +26,7 @@ export class MatchSectionComponent implements OnInit {
 
   /** utils */
   runAgainFlag: Boolean = true;
+  isScreenSmall$: Observable<boolean>;
 
   /** initial values */
   gameCategories: GameCategory[] = [];
@@ -49,6 +52,10 @@ export class MatchSectionComponent implements OnInit {
     this.getGameCategories();
     this.getPlatforms();
     this.getGameModes();
+
+    const checkScreenSize = () => document.body.offsetWidth < 1200;
+    const screenSizeChanged$ = fromEvent(window, 'resize').pipe(debounceTime(500), map(checkScreenSize));
+    this.isScreenSmall$ = screenSizeChanged$.pipe(startWith(checkScreenSize()));
   }
 
   /** initial callouts */
@@ -78,7 +85,7 @@ export class MatchSectionComponent implements OnInit {
 
   /**gameMatch handlers */
   handleUserMatch() {
-    let gameWrapper = new GameWrapper (this.categoriesToMatch,this.gameModesToMatch, this.platformsToMatch);
+    let gameWrapper = new GameWrapper(this.categoriesToMatch, this.gameModesToMatch, this.platformsToMatch);
     this.gameParams = gameWrapper;
     if (this.sectionButtons.length > 0 && this.runAgainFlag == true) {
       try {
@@ -90,15 +97,15 @@ export class MatchSectionComponent implements OnInit {
       this.matchedGames = [];
     }
   }
-  
+
   async getGamesByUserMatch() {
     this.gameService
-    .getGameMatch(this.gameParams)
-    .then(
-      async data => {
-        this.matchedGames = await data;
-      }
-    )
+      .getGameMatch(this.gameParams)
+      .then(
+        async data => {
+          this.matchedGames = await data;
+        }
+      )
   }
 
   /**item selection handlers */
@@ -250,7 +257,7 @@ export class ButtonWrapper {
     this.objectType = objectType;
     this.recordName = recordName;
     this.recordId = recordId;
-  }  
+  }
 }
 
 export class GameWrapper {
@@ -259,11 +266,11 @@ export class GameWrapper {
   platforms: Platform[];
 
   constructor(gameCategories: GameCategory[],
-      gameModes: GameMode[],
-      platforms: Platform[]
+    gameModes: GameMode[],
+    platforms: Platform[]
   ) {
-      this.gameCategories = gameCategories;
-      this.gameModes = gameModes;
-      this.platforms = platforms;
+    this.gameCategories = gameCategories;
+    this.gameModes = gameModes;
+    this.platforms = platforms;
   }
 }
