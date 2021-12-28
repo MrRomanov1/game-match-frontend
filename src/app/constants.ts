@@ -1,6 +1,6 @@
 export class Constants {
     /** site URL */
-    static SITE_URL: string = 'https://game-match.piotr-romanczak.pl/';
+    static SITE_URL: string = 'http://localhost:4200/';
     static GAME_RECORD_URL: string = Constants.SITE_URL + 'game/';
     static GAME_CATEGORY_URL: string = '/games/';
 
