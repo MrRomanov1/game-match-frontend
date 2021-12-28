@@ -29,3 +29,11 @@
   .link-no-decoration {
     text-decoration: none;
   }
+
+@media screen and (max-width: 1500px) {
+  .game-cover-img {
+    width: 170px;
+    height: 250px;
+    display: inline-block;
+  }  
+}

@@ -15,7 +15,7 @@
             </div>
         </ng-template>
         <ng-template let-game pTemplate="listItem">
-            <div class="col-6">
+            <div class="col-12 xl:col-6">
                 <div class="match-list-item mt-2 mx-2">
                     <a href="{{getGameUrl(game)}}">
                         <img src={{game.imageUrl}} class="game-cover-img-list mb-2" [alt]="game.title"/>
@@ -53,7 +53,7 @@
             </div>
         </ng-template>
         <ng-template let-game pTemplate="gridItem">
-            <div class="col-4 px-2 py-2 mb-3">
+            <div class="col-12 md:col-6 xl:col-4 px-2 py-2 mb-3">
                 <div class="match-grid-item card shadow-5">
                     <div class="match-grid-item-top grid">
                         <div class="col-6">
