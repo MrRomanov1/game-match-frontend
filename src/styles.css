@@ -354,3 +354,22 @@ a.p-menubar-button > .pi.pi-bars{
 p-card.footer-card {
     background: none !important;
 }
+
+.p-menubar-button:hover {
+    background: none !important;
+}
+
+.p-menubar-button:focus {
+    box-shadow: none !important;
+}
+
+@media screen and (max-width: 960px) {
+    .p-menubar-root-list {
+        background-color: rgb(10, 90, 70) !important;
+    }
+
+    .p-menuitem-link:hover {
+        background-color: rgb(10, 189, 139) !important;
+    }
+}
+
