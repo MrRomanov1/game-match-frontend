@@ -4,6 +4,7 @@ import { Constants } from 'src/app/constants';
 
 import { Game } from 'src/app/common/game/game';
 import { GameCategory } from 'src/app/common/game/game-category';
+import { Theme } from 'src/app/common/game/theme';
 
 @Component({
   selector: 'app-game-match-list',
@@ -14,7 +15,7 @@ import { GameCategory } from 'src/app/common/game/game-category';
 export class GameMatchListComponent implements OnInit {
   
   @Input() matchedGames: Game[];
-  @Input() categoriesToMatch: GameCategory[];  
+  @Input() showKnob: boolean;
 
   sortOrder: number;
   sortOptions: SelectItem[];

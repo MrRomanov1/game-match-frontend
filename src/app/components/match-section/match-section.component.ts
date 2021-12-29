@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Constants } from 'src/app/constants';
+import { fromEvent, Observable } from 'rxjs';
+import { debounceTime, map, startWith } from 'rxjs/operators';
 
 import { Game } from 'src/app/common/game/game';
 import { GameCategory } from 'src/app/common/game/game-category';
 import { GameMode } from 'src/app/common/game/game-mode';
 import { Platform } from 'src/app/common/game/platform';
+import { Theme } from 'src/app/common/game/theme';
 
 import { GameService } from 'src/app/services/game.service';
 import { GameCategoryListService } from 'src/app/services/game-category-list.service';
 import { GameModeService } from 'src/app/services/game-mode.service';
 import { PlatformService } from 'src/app/services/platform.service';
-import { fromEvent, Observable } from 'rxjs';
-import { debounceTime, map, startWith } from 'rxjs/operators';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-match-section',
@@ -27,16 +29,19 @@ export class MatchSectionComponent implements OnInit {
   /** utils */
   runAgainFlag: Boolean = true;
   isScreenSmall$: Observable<boolean>;
+  showKnob: boolean;
 
   /** initial values */
   gameCategories: GameCategory[] = [];
   platforms: Platform[] = [];
   gameModes: GameMode[] = [];
+  themes: Theme[] = [];
 
   /** endpoint values */
   categoriesToMatch: GameCategory[] = [];
   platformsToMatch: Platform[] = [];
   gameModesToMatch: GameMode[] = [];
+  themesToMatch: Theme[] = [];
   gameParams: GameWrapper;
 
   /** output values */
@@ -46,14 +51,16 @@ export class MatchSectionComponent implements OnInit {
     private gameCategoryListService: GameCategoryListService,
     private gameService: GameService,
     private gameModeService: GameModeService,
-    private platformService: PlatformService) { }
+    private platformService: PlatformService,
+    private themeService: ThemeService) { }
 
   ngOnInit(): void {
     this.getGameCategories();
     this.getPlatforms();
     this.getGameModes();
+    this.getThemes();
 
-    const checkScreenSize = () => document.body.offsetWidth < 1200;
+    const checkScreenSize = () => document.body.offsetWidth < 1300;
     const screenSizeChanged$ = fromEvent(window, 'resize').pipe(debounceTime(500), map(checkScreenSize));
     this.isScreenSmall$ = screenSizeChanged$.pipe(startWith(checkScreenSize()));
   }
@@ -83,9 +90,22 @@ export class MatchSectionComponent implements OnInit {
     )
   }
 
+  getThemes() {
+    this.themeService.getThemesList().subscribe(
+      data => {
+        this.themes = data;
+      }
+    )
+  }
+
   /**gameMatch handlers */
   handleUserMatch() {
-    let gameWrapper = new GameWrapper(this.categoriesToMatch, this.gameModesToMatch, this.platformsToMatch);
+    let gameWrapper = new GameWrapper(this.categoriesToMatch, this.gameModesToMatch, this.platformsToMatch, this.themesToMatch);
+    if (this.categoriesToMatch.length > 0 || this.themesToMatch.length > 0) {
+      this.showKnob = true;
+    } else {
+      this.showKnob = false;
+    }
     this.gameParams = gameWrapper;
     if (this.sectionButtons.length > 0 && this.runAgainFlag == true) {
       try {
@@ -175,6 +195,28 @@ export class MatchSectionComponent implements OnInit {
     this.handleUserMatch();
   }
 
+  handleSelectTheme(item: ButtonWrapper, theme: Theme) {
+    this.sectionButtons.push(item);
+    this.themesToMatch.push(theme);
+    this.runAgainFlag = true;
+    this.handleUserMatch();
+  }
+
+  handleDeselectTheme(item: ButtonWrapper, theme: Theme) {
+    this.themesToMatch.forEach((value, index) => {
+      if (value.id == theme.id) {
+        this.themesToMatch.splice(index, 1);
+      }
+    });
+    this.sectionButtons.forEach((value, index) => {
+      if ((value.recordName + value.recordId) == (item.recordName + item.recordId)) {
+        this.sectionButtons.splice(index, 1);
+      }
+    });
+    this.runAgainFlag = true;
+    this.handleUserMatch();
+  }
+
   handleCategoryButtonClick(category: GameCategory) {
     if (category.matchButtonClassField == Constants.BUTTON_MATCH_ACTIVE_CLASS) {
       category.matchButtonClassField = "";
@@ -214,6 +256,19 @@ export class MatchSectionComponent implements OnInit {
     this.handleUserMatch();
   }
 
+  handleThemeButtonClick(theme: Theme) {
+    if (theme.matchButtonClassField == Constants.BUTTON_MATCH_ACTIVE_CLASS) {
+      theme.matchButtonClassField = "";
+      let sectionButton = new ButtonWrapper(Constants.THEME_ENTITY, theme.name, theme.id);
+      this.handleDeselectTheme(sectionButton, theme);
+    } else {
+      theme.matchButtonClassField = Constants.BUTTON_MATCH_ACTIVE_CLASS;
+      let sectionButton = new ButtonWrapper(Constants.THEME_ENTITY, theme.name, theme.id);
+      this.handleSelectTheme(sectionButton, theme);
+    }
+    this.handleUserMatch();
+  }
+
 
   handleSectionButtonClick(sectionButton: ButtonWrapper) {
     this.sectionButtons.forEach((value, index) => {
@@ -242,6 +297,13 @@ export class MatchSectionComponent implements OnInit {
           this.platformsToMatch.splice(index, 1);
         }
       });
+    } else if (sectionButton.objectType == Constants.THEME_ENTITY) {
+      this.themesToMatch.forEach((value, index) => {
+        if ((value.name + value.id) == (sectionButton.recordName + sectionButton.recordId)) {
+          this.themesToMatch[index].matchButtonClassField = "";
+          this.themesToMatch.splice(index, 1);
+        }
+      });
     }
     this.runAgainFlag = true;
     this.handleUserMatch();
@@ -264,13 +326,16 @@ export class GameWrapper {
   gameCategories: GameCategory[];
   gameModes: GameMode[];
   platforms: Platform[];
+  themes: Theme[];
 
   constructor(gameCategories: GameCategory[],
     gameModes: GameMode[],
-    platforms: Platform[]
+    platforms: Platform[],
+    themes: Theme[]
   ) {
     this.gameCategories = gameCategories;
     this.gameModes = gameModes;
     this.platforms = platforms;
+    this.themes = themes;
   }
 }
