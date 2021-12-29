@@ -12,6 +12,7 @@ export class Constants {
     static GAME_MATCH_SERVICE_URL = Constants.ENDPOINT + 'match';
     static GAMES_BY_CATEGORY_SERVICE_URL = Constants.ENDPOINT + 'games-by-category/';
     static PLATFORMS_SERVICE_URL = Constants.ENDPOINT + 'platforms';
+    static THEMES_SERVICE_URL = Constants.ENDPOINT + 'themes';
 
     static GAME_POPULAR_SERVICE_URL = Constants.GAME_SERVICE_URL + '/popular';
     static GAME_HIGH_RATE_SERVICE_URL = Constants.GAME_SERVICE_URL + '/highest-rating';
@@ -42,4 +43,5 @@ export class Constants {
     static GAME_CATEGORY_ENTITY: string = 'GameCategory';
     static GAME_MODE_ENTITY: string = 'GameMode';
     static PLATFORM_ENTITY: string = 'Platform';
+    static THEME_ENTITY: string = 'Theme';
 }

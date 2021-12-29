@@ -24,6 +24,14 @@
                                     (click)="handleCategoryButtonClick(category)"></button>
                             </div>
                         </p-tabPanel>
+                        <p-tabPanel header="Motywy">
+                            <div class="mt-2">
+                                <button pButton type="button" label={{theme.name}} value={{theme.id}}
+                                    class="button-match mx-1 my-1 p-button-raised p-button-rounded"
+                                    *ngFor="let theme of themes" [ngClass]="theme.matchButtonClassField"
+                                    (click)="handleThemeButtonClick(theme)"></button>
+                            </div>
+                        </p-tabPanel>
                         <p-tabPanel header="Tryby Gry">
                             <div class="mt-2">
                                 <button pButton type="button" label={{gameMode.name}} value={{gameMode.id}}
@@ -54,7 +62,7 @@
             </div>
             <div class="grid" *ngIf="matchedGames.length > 0">
                 <app-game-match-list class="col-12" [matchedGames]="matchedGames"
-                    [categoriesToMatch]="categoriesToMatch"></app-game-match-list>
+                    [showKnob]="showKnob"></app-game-match-list>
                 <div class="col-11 col-offset-1">
                 </div>
             </div>
