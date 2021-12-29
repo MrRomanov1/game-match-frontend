@@ -1,11 +1,11 @@
 export class Constants {
     /** site URL */
-    static SITE_URL: string = 'http://localhost:4200/';
+    static SITE_URL: string = 'https://game-match.piotr-romanczak.pl/';
     static GAME_RECORD_URL: string = Constants.SITE_URL + 'game/';
     static GAME_CATEGORY_URL: string = '/games/';
 
     /** endpoints */
-    static ENDPOINT: string = 'http://localhost:8080/'
+    static ENDPOINT: string = 'https://game-match-backend.herokuapp.com/'
     static GAME_SERVICE_URL = Constants.ENDPOINT + 'games';
     static GAME_MODE_SERVICE_URL = Constants.ENDPOINT + 'game-modes';
     static GAME_CATEGORY_SERVICE_URL = Constants.ENDPOINT + 'game-categories';
