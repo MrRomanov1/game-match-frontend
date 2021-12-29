@@ -1,6 +1,7 @@
 import { GameCategory } from "./game-category";
 import { GameMode } from "./game-mode";
 import { Platform } from "./platform";
+import { Theme } from "./theme";
 
 export class Game {
     id: BigInteger;
@@ -19,6 +20,7 @@ export class Game {
     gameCategories: GameCategory[];
     gameModes: GameMode[];
     platforms: Platform[];
+    themes: Theme[];
     gameMatch: number;
     platformIcons: string[];
 }
