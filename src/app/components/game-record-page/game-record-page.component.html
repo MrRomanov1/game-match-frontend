@@ -54,7 +54,11 @@
                 <p class="mt-2 mb-0">Kategorie:</p>    
                 <div class="custom-link-block d-inline-block mr-3" *ngFor="let tempGameCat of alternateGameCategories">          
                     <a href="{{getGameCategoryUrl(tempGameCat.alias)}}" class="custom-link">{{tempGameCat.name}}</a><!-- lista kategorii -->       
-                </div>           
+                </div>      
+                <p class="mt-2 mb-0">Motywy:</p>    
+                <div class="custom-link-block d-inline-block mr-3" *ngFor="let tempTheme of game.themes">          
+                    <a href="{{getThemeUrl(tempTheme.alias)}}" class="custom-link">{{tempTheme.name}}</a><!-- lista kategorii -->       
+                </div>       
                 <!-- TODO -->
                 <p class="mt-2 mb-0">Tryby gry:</p>
                 <div class="custom-link-block d-inline-block mr-3" *ngFor="let tempGameMode of game.gameModes">

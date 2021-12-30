@@ -75,4 +75,10 @@ export class GameRecordPageComponent implements OnInit {
     platformUrlById = Constants.GAME_CATEGORY_URL + id;
     return platformUrlById;
   }
+
+  getThemeUrl(id: any) {
+    let themeUrlById;
+    themeUrlById = Constants.GAME_CATEGORY_URL + id;
+    return themeUrlById;
+  }
 }
